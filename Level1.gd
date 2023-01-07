@@ -103,3 +103,9 @@ func complete_level():
 		intersection.hide()
 	$LevelCompleteUI.show()
 
+
+
+func _on_Dinsky_clicked():
+	$AnimationPlayer.play_backwards('Fade2')
+	$AnimationPlayer.queue('Fade1')
+	$AnimationPlayer.queue('Fade2')

@@ -1,10 +1,53 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://images/background.jpg" type="Texture" id=1]
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Wall.tres" type="PhysicsMaterial" id=3]
 [ext_resource path="res://Level1.gd" type="Script" id=4]
 [ext_resource path="res://Theme.tres" type="Theme" id=5]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fade1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("IntroLabel1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fade2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("IntroLabel2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("IntroLabel2B:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -12,6 +55,12 @@ script = ExtResource( 4 )
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 1024, 0, 1024, 600, 0, 600, 0, 0, 1151, 0, 1072, -50, -128, -57, -103, 643, 1106, 654, 1081, 1 )
 
 [node name="Triangle1" parent="." groups=["shapes"] instance=ExtResource( 6 )]
 
@@ -35,6 +84,7 @@ polygon = PoolVector2Array( 399, 501, 709, 479, 492, 216 )
 position = Vector2( 274, 304 )
 input_pickable = true
 size = 100
+selected = true
 
 [node name="LevelCompleteUI" type="Control" parent="."]
 margin_right = 40.0
@@ -48,6 +98,38 @@ margin_bottom = 548.0
 theme = ExtResource( 5 )
 text = "Next level >"
 
+[node name="IntroLabel1" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 543.0
+margin_bottom = 78.0
+theme = ExtResource( 5 )
+text = "Click to select a juicy, round fruit from the orchard..."
+
+[node name="IntroLabel2" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 171.0
+margin_top = 99.0
+margin_right = 629.0
+margin_bottom = 127.0
+theme = ExtResource( 5 )
+text = "...but be sure not to pick it before it's"
+
+[node name="IntroLabel2B" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 579.0
+margin_top = 99.0
+margin_right = 622.0
+margin_bottom = 155.0
+theme = ExtResource( 5 )
+custom_colors/font_color = Color( 0.807843, 0.160784, 0.184314, 1 )
+text = "ripe!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade1 = SubResource( 1 )
+anims/Fade2 = SubResource( 2 )
+
+[connection signal="clicked" from="Dinsky" to="." method="_on_Dinsky_clicked"]
 [connection signal="input_event" from="Dinsky" to="." method="_on_Dinsky_input_event"]
 [connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
 [connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]

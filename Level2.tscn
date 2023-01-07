@@ -5,15 +5,13 @@
 [ext_resource path="res://images/background.jpg" type="Texture" id=3]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level2.gd" type="Script" id=5]
-
-[sub_resource type="PhysicsMaterial" id=1]
-bounce = 0.5
+[ext_resource path="res://Wall.tres" type="PhysicsMaterial" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-physics_material_override = SubResource( 1 )
+physics_material_override = ExtResource( 6 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PoolVector2Array( 0, 602, 1025, 600, 1026, -1, 1103, -7, 1089, 663, -97, 671, -108, -73, 1138, -85, 1050, -2, 0, 1 )
