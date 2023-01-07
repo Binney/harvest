@@ -15,30 +15,27 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Triangle1" parent="." groups=["shapes"] instance=ExtResource( 6 )]
-shape = PoolVector2Array( 400, -10, -5, 800, -50, -50 )
-colour = Color( 0.329412, 0.658824, 0.607843, 1 )
 
-[node name="Triangle2" parent="." instance=ExtResource( 3 )]
-points = PoolVector2Array( 500, -50, 1000, -50, 800, 1000 )
+[node name="Polygon" type="Polygon2D" parent="Triangle1"]
+color = Color( 0.329412, 0.658824, 0.607843, 1 )
+polygon = PoolVector2Array( 377, -41, -62, 997, -40, -82 )
+
+[node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 6 )]
+
+[node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
+polygon = PoolVector2Array( 689, -58, 829, 1202, 983, -105 )
 
-[node name="Triangle3" parent="." instance=ExtResource( 6 )]
-shape = PoolVector2Array( 500, 300, 600, 500, 300, 550 )
-colour = Color( 0.501961, 0.137255, 0.145098, 1 )
+[node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 6 )]
+
+[node name="Polygon" type="Polygon2D" parent="Triangle3"]
+color = Color( 0.501961, 0.137255, 0.145098, 1 )
+polygon = PoolVector2Array( 331, 497, 695, 553, 623, 277 )
 
 [node name="Dinsky" parent="." instance=ExtResource( 2 )]
-position = Vector2( 297, 309 )
+position = Vector2( 274, 304 )
 input_pickable = true
 size = 100
-
-[node name="Tri1Intersection" parent="." instance=ExtResource( 6 )]
-colour = Color( 0.0196078, 0.25098, 0.611765, 1 )
-
-[node name="Tri2Intersection" parent="." instance=ExtResource( 6 )]
-colour = Color( 0.807843, 0.160784, 0.184314, 1 )
-
-[node name="Tri3Intersection" parent="." instance=ExtResource( 6 )]
-colour = Color( 0.909804, 0.854902, 0.760784, 1 )
 
 [node name="TriangleQQremove" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -67,6 +64,6 @@ margin_bottom = 548.0
 theme = ExtResource( 5 )
 text = "Next level >"
 
-[connection signal="input_event" from="Tri2Intersection" to="." method="_on_Tri2Intersection_input_event"]
+[connection signal="input_event" from="Dinsky" to="." method="_on_Dinsky_input_event"]
 [connection signal="input_event" from="IntersectionMarker" to="." method="_on_IntersectionMarker_input_event"]
 [connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
