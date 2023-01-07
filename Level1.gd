@@ -12,8 +12,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#mark_intersections()
+func _physics_process(delta):
+	mark_intersections()
 	pass
 
 func mark_intersections():
@@ -26,16 +26,18 @@ func mark_intersections():
 		polygon2.append(point + $Triangle.position)
 
 	var intersections = Geometry.intersect_polygons_2d(polygon1, polygon2)
-	#if intersections.size() > 0: # TODO remove this as we still need to set the intersections to 0
-	#	$IntersectionMarker/Polygon2D.polygon = intersections[0]
-	#	$IntersectionMarker/CollisionPolygon2D.polygon = intersections[0]
-	#	print($IntersectionMarker/CollisionPolygon2D.polygon)
-		# TODO cover higher order intersections / concave shapes
+	if intersections.size() > 0: # TODO remove this as we still need to set the intersections to 0
+		$IntersectionMarker/Polygon2D.polygon = intersections[0]
+		$IntersectionMarker/CollisionPolygon2D.set_polygon(intersections[0])
+	else:
+		$IntersectionMarker/Polygon2D.polygon.empty()
+		$IntersectionMarker/CollisionPolygon2D.polygon.empty()
+#	# TODO cover higher order intersections / concave shapes
 
 
 func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
-	print('Event heard')
-	if event.pressed:
-		print('Clicked the intersection! check if complete intersection and complete level')
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		print('Clicked the intersection! check if complete intersection and complete level ' + str(randf()))
 	pass # Replace with function body.
+
 
