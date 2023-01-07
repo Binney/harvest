@@ -8,6 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$LevelCompleteUI.hide()
 	pass # Replace with function body.
 
 
@@ -34,7 +35,7 @@ func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
 		if difference.empty():
 			# Circle completely within triangle
 			print('Completed level!')
-			$Popup.show()
+			$LevelCompleteUI.show()
 			pass
 	pass # Replace with function body.
 
@@ -44,3 +45,8 @@ func transform_to_map(shape: Node2D):
 	for point in shape.get_polygon():
 		result.append(point + shape.position)
 	return result
+
+
+func _on_NextLevelButton_pressed():
+	# TODO fade
+	get_tree().change_scene("res://Level2.tscn")
