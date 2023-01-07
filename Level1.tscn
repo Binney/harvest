@@ -84,7 +84,6 @@ polygon = PoolVector2Array( 399, 501, 709, 479, 492, 216 )
 position = Vector2( 274, 304 )
 input_pickable = true
 size = 100
-selected = true
 
 [node name="LevelCompleteUI" type="Control" parent="."]
 margin_right = 40.0
@@ -125,7 +124,7 @@ theme = ExtResource( 5 )
 custom_colors/font_color = Color( 0.807843, 0.160784, 0.184314, 1 )
 text = "ripe!"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="IntroTextAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fade1 = SubResource( 1 )
 anims/Fade2 = SubResource( 2 )
 

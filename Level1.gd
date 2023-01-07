@@ -87,7 +87,6 @@ func is_complete(circle: Node2D):
 	return false
 
 
-
 func _on_Dinsky_mouse_entered():
 	if $Dinsky.is_complete():
 		$Dinsky.highlight_line()
@@ -106,6 +105,8 @@ func complete_level():
 
 
 func _on_Dinsky_clicked():
-	$AnimationPlayer.play_backwards('Fade2')
-	$AnimationPlayer.queue('Fade1')
-	$AnimationPlayer.queue('Fade2')
+	if not $Dinsky.selected:
+		$IntroTextAnimationPlayer.play_backwards('Fade2')
+		$IntroTextAnimationPlayer.queue('Fade1')
+		$IntroTextAnimationPlayer.queue('Fade2')
+		$Dinsky.selected = true
