@@ -1,10 +1,15 @@
 extends RigidBody2D
 
 export var size = 50
+export var colour = Color8(128, 35, 37) setget set_colour
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+func set_colour(new_colour: Color):
+	colour = new_colour
+	$Polygon2D.color = colour
 
 var max_speed = 100
 
