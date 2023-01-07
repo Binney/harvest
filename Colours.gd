@@ -5,6 +5,7 @@ const TURQUOISE = '54a89b'
 const BLUE = '05409c'
 const DEEP_RED = '802325'
 const GOLD = 'e9c97c'
+const PINK = 'f1bcb5'
 const BLACK = '28282d'
 const BG_COLOUR = 'e8dac2'
 
@@ -24,6 +25,12 @@ func mix_colours(colour1: Color, colour2: Color):
 			return BLUE
 		[DEEP_RED, GOLD]:
 			return ANSWER_RED
+		[TURQUOISE, PINK]:
+			return ANSWER_RED
+		[DEEP_RED, PINK]:
+			return TURQUOISE
+		[GOLD, PINK]:
+			return BLUE
 		[DEEP_RED, DEEP_RED]:
 			return BG_COLOUR
 		_:

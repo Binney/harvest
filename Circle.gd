@@ -4,6 +4,11 @@ export var size = 50
 export var colour = Color8(128, 35, 37) setget set_colour, get_colour
 export var complete = false setget set_complete, is_complete
 
+export var selected = false
+export var popped = false
+
+signal clicked
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -57,6 +62,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
+	if not selected: return
 	var vh = 0
 	var vv = 0
 
@@ -83,3 +89,11 @@ func pop():
 	print('Pop!')
 	$Polygon2D.color = Colours.BLUE
 	$AnimationPlayer.play('Pop', -1, 3)
+	popped = true
+
+
+func _on_RigidBody2D_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		print('You clicked me! ' + get_path())
+		emit_signal('clicked')
+
