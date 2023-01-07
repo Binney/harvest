@@ -7,7 +7,9 @@ func _ready():
 	$LevelCompleteUI.hide()
 	for shape in get_tree().get_nodes_in_group('shapes'):
 		var intersection_shape = shape_scene.instance()
-		intersection_shape.set_colour(Color(0,0,0))
+		var colour = Colours.mix_colours(shape.get_colour(), $Dinsky.get_colour())
+		print('Mixed and setting to ' + colour)
+		intersection_shape.set_colour(colour)
 		# Empty polygon until first physics_process
 		add_child(intersection_shape)
 		intersection_pieces[shape.get_path()] = intersection_shape
@@ -62,16 +64,20 @@ func _on_Tri2Intersection_input_event(viewport, event, shape_idx):
 func _on_Dinsky_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		print('Clicked circle! check if complete intersection and complete level')
-		for intersection_area in intersection_pieces.values():
-			print('Checking ' + intersection_area.get_path())
+		for shape in intersection_pieces.keys():
+			print('Checking ' + shape)
 			# Check correct colour, allowing for floating point rounding
-			if not intersection_area.get_colour().is_equal_approx(Color8(206, 41, 47)): # light red
+			if not intersection_pieces[shape].get_colour().is_equal_approx(Colours.ANSWER_RED):
 				print('Wrong colour')
 				continue
 
 			# Check intersection
-			var difference = Geometry.clip_polygons_2d(
-				get_polygon_global_coords($Dinsky), get_polygon_global_coords(intersection_area))
+			var first = get_polygon_global_coords($Dinsky)
+			var second = get_polygon_global_coords(get_node(shape))
+			var difference = Geometry.clip_polygons_2d(first, second)
+			#print(first)
+			#print(second)
+			print(difference)
 			if difference.empty():
 				print('Completed level!')
 				$LevelCompleteUI.show()

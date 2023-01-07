@@ -1,7 +1,7 @@
 extends Area2D
 
 #export var shape: PoolVector2Array setget set_shape
-export var colour: Color = Color8(255, 255, 255) setget set_colour
+export var colour: Color = Color8(255, 255, 255) setget set_colour, get_colour
 export var show_line = false setget show_line
 #export var shape: ConvexPolygonShape2D setget set_polygon
 
@@ -21,7 +21,16 @@ func set_intersection_between(mother: String, father: String):
 
 func set_colour(new_colour: Color):
 	colour = new_colour
-	$Polygon2D.color = colour
+	#$Polygon2D.color = colour
+	var actual_shape = get_node('Polygon')
+	if actual_shape == null or not actual_shape is Polygon2D: return # intersection shape
+	actual_shape.color = new_colour
+
+func get_colour():
+	var actual_shape = get_node('Polygon')
+	if actual_shape == null or not actual_shape is Polygon2D: return # intersection shape
+	print('Got colour ' + actual_shape.color.to_html(false))
+	return actual_shape.color
 
 func show_line(show):
 	if show:
