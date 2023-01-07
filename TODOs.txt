@@ -1,0 +1,9 @@
+Better stop on correct + fix "pop" animation
+Prettier theme esp buttons
+
+Lines
+
+Final level
+Finishing screen
+
+Fix circle motion to be less juddery

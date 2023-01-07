@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export var size = 50
 export var colour = Color8(128, 35, 37) setget set_colour, get_colour
+export var complete = false setget set_complete, is_complete
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -13,6 +14,23 @@ func set_colour(new_colour: Color):
 
 func get_colour():
 	return colour
+
+func set_complete(value):
+	complete = value
+	if complete:
+		#print('Complete!')
+		$Line2D.show()
+	else:
+		$Line2D.hide()
+
+func is_complete():
+	return complete
+
+func highlight_line():
+	$Line2D.width = 20
+
+func deselect_line():
+	$Line2D.width = 10
 
 var max_speed = 100
 
@@ -28,8 +46,13 @@ func _ready():
 	$CollisionShape2D.shape = shape
 
 	var polygon = PoolVector2Array()
+	$Line2D.clear_points()
 	for i in range(circle_precision):
-		polygon.append(Vector2(size, 0).rotated(i * 2 * PI / circle_precision))
+		var point = Vector2(size, 0).rotated(i * 2 * PI / circle_precision)
+		polygon.append(point)
+		$Line2D.add_point(point)
+	$Line2D.add_point($Line2D.get_point_position(0)) # complete the circle
+	$Line2D.add_point($Line2D.get_point_position(1)) # complete the circle
 	$Polygon2D.polygon = polygon
 	pass # Replace with function body.
 
@@ -55,3 +78,7 @@ func _physics_process(delta):
 	# TODO fix
 	linear_damp = -1
 	apply_central_impulse(Vector2(vh, vv) * 100)
+
+func pop():
+	print('Pop!')
+	$AnimationPlayer.play('Pop')

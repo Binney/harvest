@@ -18,7 +18,7 @@ centered = false
 
 [node name="Polygon" type="Polygon2D" parent="Triangle1"]
 color = Color( 0.329412, 0.658824, 0.607843, 1 )
-polygon = PoolVector2Array( 377, -41, -62, 997, -40, -82 )
+polygon = PoolVector2Array( 414, -24, -24, 830, -40, -82 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 6 )]
 
@@ -30,7 +30,7 @@ polygon = PoolVector2Array( 689, -58, 829, 1202, 983, -105 )
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
-polygon = PoolVector2Array( 331, 497, 695, 553, 623, 277 )
+polygon = PoolVector2Array( 399, 501, 709, 479, 492, 216 )
 
 [node name="Dinsky" parent="." instance=ExtResource( 2 )]
 position = Vector2( 274, 304 )
@@ -65,5 +65,7 @@ theme = ExtResource( 5 )
 text = "Next level >"
 
 [connection signal="input_event" from="Dinsky" to="." method="_on_Dinsky_input_event"]
+[connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
+[connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]
 [connection signal="input_event" from="IntersectionMarker" to="." method="_on_IntersectionMarker_input_event"]
 [connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
