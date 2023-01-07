@@ -23,7 +23,7 @@ points = PoolVector2Array( 500, -50, 1000, -50, 800, 1000 )
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
 
 [node name="Triangle3" parent="." instance=ExtResource( 6 )]
-shape = PoolVector2Array( 400, 300, 600, 500, 200, 450 )
+shape = PoolVector2Array( 500, 300, 600, 500, 300, 550 )
 colour = Color( 0.501961, 0.137255, 0.145098, 1 )
 
 [node name="Dinsky" parent="." instance=ExtResource( 2 )]
