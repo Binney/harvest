@@ -34,6 +34,7 @@ func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
 		if difference.empty():
 			# Circle completely within triangle
 			print('Completed level!')
+			$Popup.show()
 			pass
 	pass # Replace with function body.
 

@@ -29,4 +29,16 @@ polygon = PoolVector2Array( -52, 25, 28, 40, 60, -62 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="IntersectionMarker"]
 polygon = PoolVector2Array( -52, 20, 27, 44, 61, -55 )
 
+[node name="Popup" type="Popup" parent="."]
+visible = true
+
+[node name="Panel" type="Panel" parent="Popup"]
+margin_right = 150.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="Popup/Panel"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Congratulations!"
+
 [connection signal="input_event" from="IntersectionMarker" to="." method="_on_IntersectionMarker_input_event"]
