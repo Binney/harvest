@@ -99,5 +99,7 @@ func _on_Dinsky_mouse_exited():
 func complete_level():
 	print('Completed level!')
 	$Dinsky.pop()
+	for intersection in intersection_pieces.values():
+		intersection.hide()
 	$LevelCompleteUI.show()
 

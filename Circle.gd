@@ -32,7 +32,7 @@ func highlight_line():
 func deselect_line():
 	$Line2D.width = 10
 
-var max_speed = 100
+var max_speed = 150
 
 const circle_precision = 24
 
@@ -81,4 +81,5 @@ func _physics_process(delta):
 
 func pop():
 	print('Pop!')
-	$AnimationPlayer.play('Pop')
+	$Polygon2D.color = Colours.BLUE
+	$AnimationPlayer.play('Pop', -1, 3)
