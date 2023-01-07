@@ -44,10 +44,8 @@ func _physics_process(delta):
 
 func mark_intersections(_body1, _body2): # TODO actually use these
 	var polygon1 = PoolVector2Array()
-	print($Area2D.position)
 	for point in $Area2D/CollisionPolygon2D.polygon:
 		polygon1.append(point + $Area2D.position)
-	print(polygon1)
 
 	var polygon2 = PoolVector2Array()
 	for point in $KinematicBody2D/Polygon2D.polygon:
