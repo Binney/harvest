@@ -7,3 +7,10 @@ Final level
 Finishing screen
 
 Fix circle motion to be less juddery
+
+Feedback:
+- frustration around not getting it in right / stop on correct
+- auto select
+- start blue then red? + phrasing around "ripe" clue/instructions
+
+Make all the polygons textured a la paper

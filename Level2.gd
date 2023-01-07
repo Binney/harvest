@@ -68,7 +68,7 @@ func get_polygon_global_coords(shape: Node2D):
 
 func _on_NextLevelButton_pressed():
 	# TODO fade
-	get_tree().change_scene("res://Level2.tscn")
+	get_tree().change_scene("res://Level3.tscn")
 
 func calculate_complete(circle: Node2D):
 	var pieces = intersection_pieces[circle.get_path()]

@@ -87,7 +87,7 @@ func _physics_process(delta):
 
 func pop():
 	print('Pop!')
-	$Polygon2D.color = Colours.BLUE
+	$Polygon2D.color = Colours.ORANGE
 	$AnimationPlayer.play('Pop', -1, 3)
 	popped = true
 

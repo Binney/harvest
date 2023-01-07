@@ -24,18 +24,21 @@ centered = false
 
 [node name="Polygon" type="Polygon2D" parent="Triangle1"]
 color = Color( 0.329412, 0.658824, 0.607843, 1 )
+antialiased = true
 polygon = PoolVector2Array( 801, 248, 597, 569, 998, 482 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
+antialiased = true
 polygon = PoolVector2Array( 331, 241, 160, 538, 552, 504 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
+antialiased = true
 polygon = PoolVector2Array( 624, 324, 881, 111, 437, 74 )
 
 [node name="Kan" parent="." instance=ExtResource( 1 )]
@@ -68,3 +71,4 @@ text = "Next level >"
 [connection signal="clicked" from="Dinsky" to="." method="_on_Dinsky_clicked"]
 [connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
 [connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]
+[connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]

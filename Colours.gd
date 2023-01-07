@@ -6,6 +6,7 @@ const BLUE = '05409c'
 const DEEP_RED = '802325'
 const GOLD = 'e9c97c'
 const PINK = 'f1bcb5'
+const ORANGE = 'd07b25'
 const BLACK = '28282d'
 const BG_COLOUR = 'e8dac2'
 
