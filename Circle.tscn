@@ -43,6 +43,7 @@ shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
+antialiased = true
 polygon = PoolVector2Array( -35, 75, 9, 83, 44, 69, 76, 31, 79, -24, 57, -63, 15, -82, -31, -75, -65, -49, -84, -10, -77, 27, -61, 53 )
 
 [node name="Line2D" type="Line2D" parent="."]

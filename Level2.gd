@@ -120,25 +120,19 @@ func _on_Kan_mouse_exited():
 func _on_Dinsky_clicked():
 	$Dinsky.selected = true
 	$Kan.selected = false
-	print('Clicked dinsky')
 	if $Dinsky.is_complete():
 		$Dinsky.pop()
 		for piece in intersection_pieces[$Dinsky.get_path()].values():
 			piece.hide()
-		print('DoneD')
 		if $Kan.popped:
-			print('finish!')
 			complete_level()
 
 func _on_Kan_clicked():
 	$Kan.selected = true
 	$Dinsky.selected = false
-	print('Clicked kan')
 	if $Kan.is_complete():
 		$Kan.pop()
 		for piece in intersection_pieces[$Kan.get_path()].values():
 			piece.hide()
-		print('DoneK')
 		if $Dinsky.popped:
-			print('FINISH!')
 			complete_level()

@@ -66,18 +66,21 @@ polygon = PoolVector2Array( 1024, 0, 1024, 600, 0, 600, 0, 0, 1151, 0, 1072, -50
 
 [node name="Polygon" type="Polygon2D" parent="Triangle1"]
 color = Color( 0.329412, 0.658824, 0.607843, 1 )
+antialiased = true
 polygon = PoolVector2Array( 414, -24, -24, 830, -40, -82 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 6 )]
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
+antialiased = true
 polygon = PoolVector2Array( 689, -58, 829, 1202, 983, -105 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 6 )]
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
+antialiased = true
 polygon = PoolVector2Array( 399, 501, 709, 479, 492, 216 )
 
 [node name="Dinsky" parent="." instance=ExtResource( 2 )]
