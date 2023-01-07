@@ -17,15 +17,7 @@ func _physics_process(delta):
 	pass
 
 func mark_intersections():
-	var polygon1 = PoolVector2Array()
-	for point in $Dinsky.get_polygon():
-		polygon1.append(point + $Dinsky.position)
-
-	var polygon2 = PoolVector2Array()
-	for point in $Triangle.get_polygon():
-		polygon2.append(point + $Triangle.position)
-
-	var intersections = Geometry.intersect_polygons_2d(polygon1, polygon2)
+	var intersections = Geometry.intersect_polygons_2d(transform_to_map($Dinsky), transform_to_map($Triangle))
 	if intersections.size() > 0: # TODO remove this as we still need to set the intersections to 0
 		$IntersectionMarker/Polygon2D.polygon = intersections[0]
 		$IntersectionMarker/CollisionPolygon2D.set_polygon(intersections[0])
@@ -38,6 +30,16 @@ func mark_intersections():
 func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		print('Clicked the intersection! check if complete intersection and complete level ' + str(randf()))
+		var difference = Geometry.clip_polygons_2d(transform_to_map($Dinsky), transform_to_map($Triangle))
+		if difference.empty():
+			# Circle completely within triangle
+			print('Completed level!')
+			pass
 	pass # Replace with function body.
 
-
+func transform_to_map(shape: Node2D):
+	if not shape.has_method('get_polygon'): return
+	var result = PoolVector2Array()
+	for point in shape.get_polygon():
+		result.append(point + shape.position)
+	return result
