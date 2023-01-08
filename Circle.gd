@@ -98,6 +98,9 @@ func pop():
 	$AnimationPlayer.play('Pop', -1, 3)
 	popped = true
 
+func disable_line():
+	$Line2D.hide()
+	$Line2D.width = 0
 
 func _on_RigidBody2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:

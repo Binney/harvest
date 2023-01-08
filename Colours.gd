@@ -9,7 +9,8 @@ enum SHAPE_COLOURS {
 	ORANGE,
 	BLACK,
 	BG_COLOUR,
-	ANSWER_RED
+	ANSWER_RED,
+	FINAL_WHITE
 }
 
 func to_hex(enum_colour: int):
@@ -32,6 +33,8 @@ func to_hex(enum_colour: int):
 			return 'e8dac2'
 		SHAPE_COLOURS.ANSWER_RED:
 			return 'ce292f'
+		SHAPE_COLOURS.FINAL_WHITE:
+			return 'f4f1e4'
 		_:
 			return '28282d' # Black
 
@@ -87,9 +90,12 @@ func mix_colours(colour1: int, colour2: int):
 		[SHAPE_COLOURS.ORANGE, SHAPE_COLOURS.ORANGE]:
 			return SHAPE_COLOURS.BG_COLOUR
 
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.FINAL_WHITE]:
+			return SHAPE_COLOURS.FINAL_WHITE
+
 		_:
-			print('fallback')
+			print('fallback ' + str(colour1) + ', ' + str(colour2))
 			return SHAPE_COLOURS.BLACK
 
 func get_rand_colour():
-	return randi() % 7
+	return randi() % 6

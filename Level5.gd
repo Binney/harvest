@@ -64,13 +64,14 @@ func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
 func get_polygon_global_coords(shape: Node2D):
 	if not shape.has_method('get_polygon'): return
 	var result = PoolVector2Array()
+	var transform = shape.get_global_transform()
 	for point in shape.get_polygon():
-		result.append(point + shape.position)
+		result.append(transform.xform(point))
 	return result
 
 func _on_NextLevelButton_pressed():
 	# TODO fade
-	get_tree().change_scene("res://Level6.tscn")
+	get_tree().change_scene("res://FinalLevel.tscn")
 
 func calculate_complete(circle: Node2D):
 	var pieces = intersection_pieces[circle.get_path()]

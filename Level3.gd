@@ -66,8 +66,9 @@ func mark_intersections(circle: Node2D, shape2: Node2D):
 func get_polygon_global_coords(shape: Node2D):
 	if not shape.has_method('get_polygon'): return
 	var result = PoolVector2Array()
+	var transform = shape.get_global_transform()
 	for point in shape.get_polygon():
-		result.append(point + shape.position)
+		result.append(transform.xform(point))
 	return result
 
 func _on_NextLevelButton_pressed():

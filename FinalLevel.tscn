@@ -1,18 +1,131 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://images/finale_background.jpg" type="Texture" id=1]
 [ext_resource path="res://FinalLevel.gd" type="Script" id=2]
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://WallLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=5]
+[ext_resource path="res://images/finale_circle.png" type="Texture" id=6]
+[ext_resource path="res://Theme.tres" type="Theme" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 2.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 1300.01
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 227.002
+
+[sub_resource type="Animation" id=4]
+resource_name = "Finish"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 60, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/BigHoleThing:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1.86607 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 10, 10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/Shape:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 4.28709 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 10, 10 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Triangles:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Circles:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("IntersectionPieces:self_modulate")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Show button"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle/Camera2D/Button:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Circle/Camera2D/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.001, 1 )
 texture = ExtResource( 1 )
 centered = false
 
@@ -82,8 +195,143 @@ width = 4.0
 default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
 antialiased = true
 
+[node name="ZeroGArea" type="Area2D" parent="."]
+position = Vector2( 512, 4382 )
+collision_layer = 255
+collision_mask = 255
+priority = 1.0
+space_override = 2
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZeroGArea"]
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 512, 4382 )
+collision_layer = 255
+collision_mask = 255
+priority = 2.0
+space_override = 4
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = -200.0
+
+[node name="BigHoleThing" type="Sprite" parent="Area2D"]
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[node name="Shape" parent="Area2D" groups=["shapes"] instance=ExtResource( 5 )]
+colour = 9
+
+[node name="Polygon" type="Polygon2D" parent="Area2D/Shape"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, -226, 58, -220, 114, -197, 162, -160, 196, -114, 219, -60, 227, 1, 220, 59, 197, 112, 161, 159, 116, 196, 60, 219, 1, 227, -64, 219, -115, 199, -158, 164, -197, 114, -219, 62, -226, 1, -219, -61, -204, -104, -160, -161, -112, -197, -60, -220 )
+
+[node name="Triangles" type="Node2D" parent="."]
+
+[node name="RigidBody2D6" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 300, 4300 )
+collision_layer = 2
+collision_mask = 2
+linear_velocity = Vector2( 50, -30 )
+
+[node name="Shape" parent="Triangles/RigidBody2D6" groups=["shapes"] instance=ExtResource( 5 )]
+colour = 5
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D6/Shape"]
+color = Color( 0.815686, 0.482353, 0.145098, 1 )
+polygon = PoolVector2Array( -129, 37, 189, 103, -143, -194 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D6"]
+polygon = PoolVector2Array( -141, -192, -128, 37, 190, 102 )
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 700, 4600 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" parent="Triangles/RigidBody2D5" groups=["shapes"] instance=ExtResource( 5 )]
+colour = 3
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D5/Shape"]
+color = Color( 0.0196078, 0.25098, 0.611765, 1 )
+polygon = PoolVector2Array( -232, 78, 213, 128, 27, -145 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D5"]
+polygon = PoolVector2Array( 27, -146, -231, 78, 211, 128 )
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 400, 4700 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" parent="Triangles/RigidBody2D4" groups=["shapes"] instance=ExtResource( 5 )]
+colour = 2
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D4/Shape"]
+color = Color( 0.945098, 0.737255, 0.709804, 1 )
+polygon = PoolVector2Array( -129, 37, 131, 94, 1, -226 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D4"]
+polygon = PoolVector2Array( 0, -225, -127, 37, 132, 93 )
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 800, 3900 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" parent="Triangles/RigidBody2D3" groups=["shapes"] instance=ExtResource( 5 )]
+colour = 1
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D3/Shape"]
+color = Color( 0.501961, 0.137255, 0.145098, 1 )
+polygon = PoolVector2Array( -244, 47, 131, 94, 102, -132 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D3"]
+polygon = PoolVector2Array( 97, -132, -242, 48, 129, 91 )
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 600, 4100 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" parent="Triangles/RigidBody2D2" groups=["shapes"] instance=ExtResource( 5 )]
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D2/Shape"]
+color = Color( 0.329412, 0.658824, 0.607843, 1 )
+polygon = PoolVector2Array( -298, 1, 131, 94, 102, -132 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D2"]
+polygon = PoolVector2Array( 101, -131, -297, 1, 129, 93 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Triangles"]
+position = Vector2( 200, 4000 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" parent="Triangles/RigidBody2D" groups=["shapes"] instance=ExtResource( 5 )]
+
+[node name="Polygon" type="Polygon2D" parent="Triangles/RigidBody2D/Shape"]
+color = Color( 0.913725, 0.788235, 0.486275, 1 )
+polygon = PoolVector2Array( -129, 37, 127, 62, 82, -217 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangles/RigidBody2D"]
+polygon = PoolVector2Array( 80, -217, -129, 36, 127, 62 )
+
+[node name="Circles" type="Node2D" parent="."]
+
+[node name="Circle1" parent="Circles" groups=["circles"] instance=ExtResource( 3 )]
+position = Vector2( 300, 4000 )
+gravity_scale = 1.0
+size = 30
+
 [node name="Circle" parent="." groups=["circles"] instance=ExtResource( 3 )]
-position = Vector2( 512, 73 )
+position = Vector2( 512, 78 )
+input_pickable = true
 mass = 5.0
 gravity_scale = 5.0
 linear_damp = -1.0
@@ -96,3 +344,33 @@ limit_left = 0
 limit_top = 0
 limit_right = 1024
 limit_bottom = 4803
+
+[node name="Label" type="Label" parent="Circle/Camera2D"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -92.0
+margin_top = -16.0
+margin_right = 90.0
+margin_bottom = 12.0
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Congratulations!"
+
+[node name="Button" type="Button" parent="Circle/Camera2D"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -71.0
+margin_top = 37.0
+margin_right = 69.0
+margin_bottom = 65.0
+theme = ExtResource( 7 )
+text = "Back to start"
+
+[node name="IntersectionPieces" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Finish = SubResource( 4 )
+"anims/Show button" = SubResource( 5 )
+
+[connection signal="clicked" from="Circle" to="." method="_on_Circle_clicked"]
+[connection signal="pressed" from="Circle/Camera2D/Button" to="." method="_on_Button_pressed"]
