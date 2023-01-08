@@ -80,7 +80,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("ui_up") and linear_velocity.y > -max_speed:
 		vv = -1
-	elif Input.is_action_pressed("ui_down") and linear_velocity.y < max_speed:
+	elif Input.is_action_pressed("ui_down") and (linear_velocity.y < max_speed or gravity_scale != 0):
 		vv = 1
 
 	if vv == 0 and vh == 0:

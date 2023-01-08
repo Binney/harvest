@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://images/finale_background.jpg" type="Texture" id=1]
 [ext_resource path="res://FinalLevel.gd" type="Script" id=2]
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://WallLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=5]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 2.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -20,10 +23,10 @@ color = Color( 0.329412, 0.658824, 0.607843, 1 )
 polygon = PoolVector2Array( 122, 952, 1121, 435, 1177, 1076 )
 
 [node name="Shape2" parent="." groups=["shapes"] instance=ExtResource( 5 )]
-colour = 4
+colour = 2
 
 [node name="Polygon" type="Polygon2D" parent="Shape2"]
-color = Color( 0.913725, 0.788235, 0.486275, 1 )
+color = Color( 0.945098, 0.737255, 0.709804, 1 )
 polygon = PoolVector2Array( -195, 1209, 351, 1324, 599, 1578, -125, 1638 )
 
 [node name="WallLine" parent="." instance=ExtResource( 4 )]
@@ -43,6 +46,7 @@ default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
 antialiased = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PoolVector2Array( 1028, -13, 1024, 2327, 1024, 2316, 1024, 4803, 0, 4803, 0, 0, 958, -1, 1434, -276, -395, -291, -350, 5046, 1333, 5101, 1474, 46 )
