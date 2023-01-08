@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://images/finale_background.jpg" type="Texture" id=1]
+[ext_resource path="res://FinalLevel.gd" type="Script" id=2]
+[ext_resource path="res://Circle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://WallLine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Shape.tscn" type="PackedScene" id=5]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Shape" parent="." groups=["shapes"] instance=ExtResource( 5 )]
+
+[node name="Polygon" type="Polygon2D" parent="Shape"]
+color = Color( 0.329412, 0.658824, 0.607843, 1 )
+polygon = PoolVector2Array( 122, 952, 1121, 435, 1177, 1076 )
+
+[node name="Shape2" parent="." groups=["shapes"] instance=ExtResource( 5 )]
+colour = 4
+
+[node name="Polygon" type="Polygon2D" parent="Shape2"]
+color = Color( 0.913725, 0.788235, 0.486275, 1 )
+polygon = PoolVector2Array( -195, 1209, 351, 1324, 599, 1578, -125, 1638 )
+
+[node name="WallLine" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine"]
+points = PoolVector2Array( 259, 340, 882, 110 )
+width = 7.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="WallLine2" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine2"]
+points = PoolVector2Array( 248, 408, 844, 176 )
+width = 4.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 1028, -13, 1024, 2327, 1024, 2316, 1024, 4803, 0, 4803, 0, 0, 958, -1, 1434, -276, -395, -291, -350, 5046, 1333, 5101, 1474, 46 )
+
+[node name="WallLine3" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine3"]
+points = PoolVector2Array( -46, 422, 550, 1221 )
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="WallLine4" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine4"]
+points = PoolVector2Array( 445, 1174, 525, 1111 )
+width = 4.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="WallLine5" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine5"]
+points = PoolVector2Array( 455, 1204, 557, 1125 )
+width = 7.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="WallLine6" parent="." instance=ExtResource( 4 )]
+
+[node name="Line2D" type="Line2D" parent="WallLine6"]
+points = PoolVector2Array( 488, 1214, 557, 1160 )
+width = 4.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
+
+[node name="Circle" parent="." groups=["circles"] instance=ExtResource( 3 )]
+position = Vector2( 512, 73 )
+gravity_scale = 1.0
+linear_damp = -1.0
+selected = true
+
+[node name="Camera2D" type="Camera2D" parent="Circle"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1024
+limit_bottom = 4803
