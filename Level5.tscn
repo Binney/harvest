@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme.tres" type="Theme" id=2]
-[ext_resource path="res://images/background.jpg" type="Texture" id=3]
+[ext_resource path="res://images/level5.jpg" type="Texture" id=3]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Level2.gd" type="Script" id=5]
+[ext_resource path="res://Level5.gd" type="Script" id=5]
 [ext_resource path="res://Wall.tres" type="PhysicsMaterial" id=6]
 
 [node name="Node2D" type="Node2D"]
@@ -21,11 +21,12 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Triangle1" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 3
 
 [node name="Polygon" type="Polygon2D" parent="Triangle1"]
-color = Color( 0.329412, 0.658824, 0.607843, 1 )
+color = Color( 0.0196078, 0.25098, 0.611765, 1 )
 antialiased = true
-polygon = PoolVector2Array( 801, 248, 597, 569, 998, 482 )
+polygon = PoolVector2Array( 684, 293, 803, 346, 957, 214, 923, 44 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 colour = 4
@@ -33,27 +34,27 @@ colour = 4
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
 antialiased = true
-polygon = PoolVector2Array( 331, 241, 160, 538, 552, 504 )
+polygon = PoolVector2Array( 1004, 441, 957, 214, 803, 346 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 4 )]
-colour = 1
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
+color = Color( 0.329412, 0.658824, 0.607843, 1 )
+antialiased = true
+polygon = PoolVector2Array( 869, 668, 1333, 699, 1022, 158, 956.859, 213.782, 1004, 441, 802.76, 345.74, 500, 605 )
+
+[node name="Triangle4" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 1
+
+[node name="Polygon" type="Polygon2D" parent="Triangle4"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
 antialiased = true
-polygon = PoolVector2Array( 624, 324, 881, 111, 437, 74 )
+polygon = PoolVector2Array( -73, -19, -88, 623, 159, 630, 363, -10 )
 
-[node name="Kan" parent="." instance=ExtResource( 1 )]
-position = Vector2( 191, 169 )
+[node name="Circle" parent="." groups=["circles"] instance=ExtResource( 1 )]
+position = Vector2( 84, 501 )
 input_pickable = true
-size = 80
-colour = 2
 selected = true
-
-[node name="Dinsky" parent="." instance=ExtResource( 1 )]
-position = Vector2( 904, 325 )
-input_pickable = true
-size = 80
 
 [node name="LevelCompleteUI" type="Control" parent="."]
 margin_right = 40.0
@@ -67,10 +68,5 @@ margin_bottom = 548.0
 theme = ExtResource( 2 )
 text = "Next level >"
 
-[connection signal="clicked" from="Kan" to="." method="_on_Kan_clicked"]
-[connection signal="mouse_entered" from="Kan" to="." method="_on_Kan_mouse_entered"]
-[connection signal="mouse_exited" from="Kan" to="." method="_on_Kan_mouse_exited"]
-[connection signal="clicked" from="Dinsky" to="." method="_on_Dinsky_clicked"]
-[connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
-[connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]
+[connection signal="clicked" from="Circle" to="." method="_on_Circle_clicked"]
 [connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]

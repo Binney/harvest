@@ -32,7 +32,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
 }
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Circle" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 0.5

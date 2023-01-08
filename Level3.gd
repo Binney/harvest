@@ -14,7 +14,6 @@ func add_intersection(shape1, shape2):
 
 	var intersection_shape = shape_scene.instance()
 	var colour = Colours.mix_colours(shape1.get_colour(), shape2.get_colour())
-	print('Mixed and setting to ' + colour)
 	intersection_shape.set_colour(colour)
 	# Empty polygon until first physics_process
 	add_child(intersection_shape)
@@ -58,9 +57,6 @@ func mark_intersections(circle: Node2D, shape2: Node2D):
 
 	pass
 
-func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
-	pass
-
 func get_polygon_global_coords(shape: Node2D):
 	if not shape.has_method('get_polygon'): return
 	var result = PoolVector2Array()
@@ -77,7 +73,7 @@ func calculate_complete(circle: Node2D):
 	for shape in pieces.keys():
 		#print('Checking ' + shape)
 		# Check correct colour, allowing for floating point rounding
-		if not pieces[shape].get_colour().is_equal_approx(Colours.ANSWER_RED):
+		if pieces[shape].get_colour() != Colours.SHAPE_COLOURS.ANSWER_RED:
 			#print('Wrong colour')
 			continue
 

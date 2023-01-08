@@ -1,81 +1,116 @@
 extends Node
 
 # Palette:
-const TURQUOISE = '54a89b'
-const DEEP_RED = '802325'
+var comment = """
+const SHAPE_COLOURS.TURQUOISE = '54a89b'
+const SHAPE_COLOURS.DEEP_RED = '802325'
 const PINK = 'f1bcb5'
 const BLUE = '05409c'
 const GOLD = 'e9c97c'
 const ORANGE = 'd07b25'
-
 const PALETTE = [TURQUOISE, DEEP_RED, PINK, BLUE, GOLD, ORANGE]
 
 const BLACK = '28282d'
 const BG_COLOUR = 'e8dac2'
 
 const ANSWER_RED = 'ce292f'
+"""
+enum SHAPE_COLOURS {
+	TURQUOISE,
+	DEEP_RED,
+	PINK,
+	BLUE,
+	GOLD,
+	ORANGE,
+	BLACK,
+	BG_COLOUR,
+	ANSWER_RED
+}
 
-func mix_colours(colour1: Color, colour2: Color):
-	print('Mixing ' + colour1.to_html(false) + ' and ' + colour2.to_html(false))
-	# Colours in alphabetical order by hex code. Be sure to check your match is the right way around
-	# too and put it both ways if you want to be on the safe side!
-	var arr = [colour1.to_html(false), colour2.to_html(false)]
-	arr.sort_custom(self, 'colour_order')
+func asdf(x):
+	print('did x ' + str(x))
+
+func to_hex(enum_colour: int):
+	match enum_colour:
+		SHAPE_COLOURS.TURQUOISE:
+			return '54a89b'
+		SHAPE_COLOURS.DEEP_RED:
+			return '802325'
+		SHAPE_COLOURS.PINK:
+			return 'f1bcb5'
+		SHAPE_COLOURS.BLUE:
+			return '05409c'
+		SHAPE_COLOURS.GOLD:
+			return 'e9c97c'
+		SHAPE_COLOURS.ORANGE:
+			return 'd07b25'
+		SHAPE_COLOURS.BLACK:
+			return '28282d'
+		SHAPE_COLOURS.BG_COLOUR:
+			return 'e8dac2'
+		SHAPE_COLOURS.ANSWER_RED:
+			return 'ce292f'
+		_:
+			return '28282d' # Black
+
+func mix_colours(colour1: int, colour2: int):
+	print('Mixing ' + str(colour1) + ' and ' + str(colour2))
+	#print('Mixing ' + colour1.to_html(false) + ' and ' + colour2.to_html(false))
+	var arr = [colour1, colour2]
+	arr.sort()
+	print(arr)
 	match arr:
-		[TURQUOISE, TURQUOISE]:
-			return BG_COLOUR
-		[TURQUOISE, DEEP_RED]:
-			return BLUE
-		[TURQUOISE, PINK]:
-			return ANSWER_RED
-		[TURQUOISE, BLUE]:
-			return GOLD
-		[TURQUOISE, GOLD]:
-			return ORANGE
-		[TURQUOISE, ORANGE]:
-			return DEEP_RED
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.TURQUOISE]:
+			return SHAPE_COLOURS.BG_COLOUR
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.DEEP_RED]:
+			return SHAPE_COLOURS.BLUE
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.PINK]:
+			return SHAPE_COLOURS.ANSWER_RED
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.BLUE]:
+			return SHAPE_COLOURS.GOLD
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.GOLD]:
+			return SHAPE_COLOURS.ORANGE
+		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.DEEP_RED
 
-		[DEEP_RED, DEEP_RED]:
-			return BG_COLOUR
-		[DEEP_RED, PINK]:
-			return TURQUOISE
-		[DEEP_RED, BLUE]:
-			return ORANGE
-		[DEEP_RED, GOLD]:
-			return ANSWER_RED
-		[DEEP_RED, ORANGE]:
-			return PINK
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.DEEP_RED]:
+			return SHAPE_COLOURS.BG_COLOUR
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.PINK]:
+			return SHAPE_COLOURS.TURQUOISE
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.BLUE]:
+			return SHAPE_COLOURS.ORANGE
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.GOLD]:
+			return SHAPE_COLOURS.ANSWER_RED
+		[SHAPE_COLOURS.DEEP_RED, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.PINK
 
-		[PINK, PINK]:
-			return BG_COLOUR
-		[PINK, BLUE]:
-			return DEEP_RED
-		[PINK, GOLD]:
-			return BLUE
-		[PINK, ORANGE]:
-			return GOLD
+		[SHAPE_COLOURS.PINK, SHAPE_COLOURS.PINK]:
+			return SHAPE_COLOURS.BG_COLOUR
+		[SHAPE_COLOURS.PINK, SHAPE_COLOURS.BLUE]:
+			return SHAPE_COLOURS.DEEP_RED
+		[SHAPE_COLOURS.PINK, SHAPE_COLOURS.GOLD]:
+			return SHAPE_COLOURS.BLUE
+		[SHAPE_COLOURS.PINK, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.GOLD
 
-		[BLUE, BLUE]:
-			return BG_COLOUR
-		[BLUE, GOLD]:
-			return PINK
-		[BLUE, ORANGE]:
-			return ANSWER_RED
+		[SHAPE_COLOURS.BLUE, SHAPE_COLOURS.BLUE]:
+			return SHAPE_COLOURS.BG_COLOUR
+		[SHAPE_COLOURS.BLUE, SHAPE_COLOURS.GOLD]:
+			return SHAPE_COLOURS.PINK
+		[SHAPE_COLOURS.BLUE, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.ANSWER_RED
 
-		[GOLD, GOLD]:
-			return BG_COLOUR
-		[GOLD, ORANGE]:
-			return TURQUOISE
+		[SHAPE_COLOURS.GOLD, SHAPE_COLOURS.GOLD]:
+			return SHAPE_COLOURS.BG_COLOUR
+		[SHAPE_COLOURS.GOLD, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.TURQUOISE
 
-		[ORANGE, ORANGE]:
-			return BG_COLOUR
+		[SHAPE_COLOURS.ORANGE, SHAPE_COLOURS.ORANGE]:
+			return SHAPE_COLOURS.BG_COLOUR
 
 		_:
 			print('fallback')
-			return BLACK
+			return SHAPE_COLOURS.BLACK
 
 func get_rand_colour():
-	return PALETTE[randi() % 7]
-
-func colour_order(a, b):
-	return PALETTE.find(a) < PALETTE.find(b)
+	return randi() % 7

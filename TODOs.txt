@@ -14,6 +14,8 @@ Make all the polygons textured a la paper
 
 why is all of level 3 circles the same size?
 
+roll out keyboard control across all levels (currently: only 3)
+
 make intersection building lazy - spawn on enter/recycle on exit
 - keep iteration the same though
 

@@ -1,9 +1,7 @@
 extends RigidBody2D
 
-tool
-
 export var size = 50 setget set_size, get_size
-export var colour = Color8(128, 35, 37) setget set_colour, get_colour
+export(Colours.SHAPE_COLOURS) var colour = Colours.SHAPE_COLOURS.DEEP_RED setget set_colour, get_colour
 export var complete = false setget set_complete, is_complete
 
 export var selected = false
@@ -15,9 +13,10 @@ signal clicked
 # var a = 2
 # var b = "text"
 
-func set_colour(new_colour: Color):
+func set_colour(new_colour: int):
+	print('Setting colour to ' + str(new_colour))
 	colour = new_colour
-	$Polygon2D.color = colour
+	$Polygon2D.color = Color(Colours.to_hex(new_colour))
 
 func get_colour():
 	return colour
@@ -25,7 +24,6 @@ func get_colour():
 func set_complete(value):
 	complete = value
 	if complete:
-		#print('Complete!')
 		$Line2D.show()
 	else:
 		$Line2D.hide()
@@ -96,7 +94,7 @@ func _physics_process(delta):
 
 func pop():
 	print('Pop!')
-	$Polygon2D.color = Colours.ORANGE
+	$Polygon2D.color = Colours.to_hex(Colours.SHAPE_COLOURS.ORANGE)
 	$AnimationPlayer.play('Pop', -1, 3)
 	popped = true
 

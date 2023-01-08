@@ -8,7 +8,6 @@ func _ready():
 	for shape in get_tree().get_nodes_in_group('shapes'):
 		var intersection_shape = shape_scene.instance()
 		var colour = Colours.mix_colours(shape.get_colour(), $Dinsky.get_colour())
-		print('Mixed and setting to ' + colour)
 		intersection_shape.set_colour(colour)
 		# Empty polygon until first physics_process
 		add_child(intersection_shape)
@@ -66,7 +65,7 @@ func is_complete(circle: Node2D):
 	for shape in intersection_pieces.keys():
 		#print('Checking ' + shape)
 		# Check correct colour, allowing for floating point rounding
-		if not intersection_pieces[shape].get_colour().is_equal_approx(Colours.ANSWER_RED):
+		if intersection_pieces[shape].get_colour() != Colours.SHAPE_COLOURS.ANSWER_RED:
 			#print('Wrong colour')
 			continue
 

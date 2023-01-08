@@ -29,6 +29,7 @@ antialiased = true
 polygon = PoolVector2Array( -26, -40, -65, 625, 320, 623, 155, -18 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 1 )]
+colour = 4
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
@@ -36,6 +37,7 @@ antialiased = true
 polygon = PoolVector2Array( 1053, -26, 700, -44, 1077, 585, 1132, 543 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 1 )]
+colour = 1
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
@@ -121,3 +123,4 @@ text = "Next level >"
 [connection signal="clicked" from="Dinsky" to="." method="_on_Dinsky_clicked"]
 [connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
 [connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]
+[connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]

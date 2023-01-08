@@ -70,6 +70,7 @@ antialiased = true
 polygon = PoolVector2Array( 414, -24, -24, 830, -40, -82 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 6 )]
+colour = 4
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
@@ -77,6 +78,7 @@ antialiased = true
 polygon = PoolVector2Array( 689, -58, 829, 1202, 983, -105 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 6 )]
+colour = 1
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )

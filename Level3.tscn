@@ -28,6 +28,7 @@ antialiased = true
 polygon = PoolVector2Array( 179, -170, 317, 310, 502, 222 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 4
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
@@ -35,6 +36,7 @@ antialiased = true
 polygon = PoolVector2Array( 609, 353, 1606, -302, 502, 222 )
 
 [node name="Triangle7" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 4
 
 [node name="Polygon" type="Polygon2D" parent="Triangle7"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
@@ -42,6 +44,7 @@ antialiased = true
 polygon = PoolVector2Array( -263, 586, -47, 784, 373, 508, 317.237, 310.318 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 1
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
@@ -49,6 +52,7 @@ antialiased = true
 polygon = PoolVector2Array( 869, 668, 1333, 699, 1595, -291, 680, 439 )
 
 [node name="Triangle4" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 5
 
 [node name="Polygon" type="Polygon2D" parent="Triangle4"]
 color = Color( 0.815686, 0.482353, 0.145098, 1 )
@@ -56,6 +60,7 @@ antialiased = true
 polygon = PoolVector2Array( 317, 310, 373, 508, 609, 353, 502, 222 )
 
 [node name="Triangle5" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+colour = 3
 
 [node name="Polygon" type="Polygon2D" parent="Triangle5"]
 color = Color( 0.0196078, 0.25098, 0.611765, 1 )
@@ -73,23 +78,23 @@ polygon = PoolVector2Array( 373, 508, 405, 604, 460.364, 617.627, 680, 439, 609,
 position = Vector2( 136, 263 )
 input_pickable = true
 size = 70
-colour = Color( 0.945098, 0.737255, 0.709804, 1 )
+colour = 2
 selected = true
 
 [node name="OrangeCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 890, 467 )
 input_pickable = true
-colour = Color( 0.815686, 0.482353, 0.145098, 1 )
+colour = 5
 
 [node name="BlueCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 811, 214 )
 input_pickable = true
-colour = Color( 0.0196078, 0.25098, 0.611765, 1 )
+colour = 3
 
 [node name="GoldCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 493, 503 )
 input_pickable = true
-colour = Color( 0.913725, 0.788235, 0.486275, 1 )
+colour = 4
 
 [node name="RedCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 543, 93 )
