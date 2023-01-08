@@ -25,15 +25,12 @@ func add_intersection(shape1, shape2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	#for circle in get_tree().get_nodes_in_group('circles'):
-	var circle = $BlueCircle
-	for shape in get_tree().get_nodes_in_group('shapes'):
-		mark_intersections(circle, shape)
-	circle.set_complete(calculate_complete(circle))
+	for circle in get_tree().get_nodes_in_group('circles'):
+		for shape in get_tree().get_nodes_in_group('shapes'):
+			mark_intersections(circle, shape)
+		circle.set_complete(calculate_complete(circle))
 
 func mark_intersections(circle: Node2D, shape2: Node2D):
-	if circle.get_path() == '/root/Node2D/GoldCircle':
-		print('Marking intersections between ' + circle.get_path() + ' and ' + shape2.get_path())
 	var intersection_marker = intersection_pieces[circle.get_path()][shape2.get_path()]
 	var intersections = Geometry.intersect_polygons_2d(
 		get_polygon_global_coords(circle), get_polygon_global_coords(shape2))
@@ -45,9 +42,8 @@ func mark_intersections(circle: Node2D, shape2: Node2D):
 		#	circle.set_complete(true)
 			# TODO handle no longer being complete
 	else:
-		pass
 		#print('No intersection')
-		#intersection_marker.set_polygon(PoolVector2Array())
+		intersection_marker.set_polygon(PoolVector2Array())
 
 	pass
 
@@ -110,10 +106,10 @@ func select_circle(circle):
 	circle.selected = true
 	if circle.is_complete():
 		circle.pop()
-	for piece in intersection_pieces[circle.get_path()].values():
-		piece.hide()
-	if all_circles_popped():
-		complete_level()
+		for piece in intersection_pieces[circle.get_path()].values():
+			piece.hide()
+		if all_circles_popped():
+			complete_level()
 
 func _on_OrangeCircle_clicked():
 	select_circle($OrangeCircle)
