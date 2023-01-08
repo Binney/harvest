@@ -132,3 +132,4 @@ func _on_Dinsky_clicked():
 		$IntroTextAnimationPlayer.queue('Fade1')
 		$IntroTextAnimationPlayer.queue('Fade2')
 		$Dinsky.selected = true
+	click_circle($Dinsky)
