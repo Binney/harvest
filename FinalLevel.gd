@@ -30,6 +30,11 @@ func add_intersection(shape1, shape2):
 
 	var intersection_shape = shape_scene.instance()
 	var colour = Colours.mix_colours(shape1.get_colour(), shape2.get_colour())
+	# hack hack hack
+	if colour == Colours.SHAPE_COLOURS.ANSWER_RED:
+		colour = Colours.SHAPE_COLOURS.BLACK
+	elif colour == Colours.SHAPE_COLOURS.FINAL_WHITE:
+		colour = Colours.SHAPE_COLOURS.ANSWER_RED
 	#print('Mixed and setting to ' + str(colour))
 	intersection_shape.set_colour(colour)
 	# Empty polygon until first physics_process

@@ -10,6 +10,7 @@ var triangle_scene = preload("Triangle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	spawn_circle()
 	$Button.grab_focus()
 	pass # Replace with function body.
@@ -18,6 +19,7 @@ func spawn_circle():
 	var circle = circle_scene.instance()
 	circle.size = 50 + (randi() % 100)
 	circle.colour = Colours.get_rand_colour()
+	print('And it\'ll be this colour: ' + str(circle.colour))
 	circle.position = Vector2((randi() % 400) + (randi() % 2) * 600, -circle.size)
 	circle.gravity_scale = 1
 	circle.mass = circle.size / 100

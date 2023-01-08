@@ -19,6 +19,9 @@ sfx!
 make intersection building lazy - spawn on enter/recycle on exit
 - keep iteration the same though
 
+more levels
+more to do on final level
+
 Credit fonts MixModern mixfonts.com
 
 const TURQUOISE = '54a89b'
