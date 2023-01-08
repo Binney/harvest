@@ -1,20 +1,5 @@
 extends Node
 
-# Palette:
-var comment = """
-const SHAPE_COLOURS.TURQUOISE = '54a89b'
-const SHAPE_COLOURS.DEEP_RED = '802325'
-const PINK = 'f1bcb5'
-const BLUE = '05409c'
-const GOLD = 'e9c97c'
-const ORANGE = 'd07b25'
-const PALETTE = [TURQUOISE, DEEP_RED, PINK, BLUE, GOLD, ORANGE]
-
-const BLACK = '28282d'
-const BG_COLOUR = 'e8dac2'
-
-const ANSWER_RED = 'ce292f'
-"""
 enum SHAPE_COLOURS {
 	TURQUOISE,
 	DEEP_RED,
@@ -26,9 +11,6 @@ enum SHAPE_COLOURS {
 	BG_COLOUR,
 	ANSWER_RED
 }
-
-func asdf(x):
-	print('did x ' + str(x))
 
 func to_hex(enum_colour: int):
 	match enum_colour:
@@ -54,11 +36,8 @@ func to_hex(enum_colour: int):
 			return '28282d' # Black
 
 func mix_colours(colour1: int, colour2: int):
-	print('Mixing ' + str(colour1) + ' and ' + str(colour2))
-	#print('Mixing ' + colour1.to_html(false) + ' and ' + colour2.to_html(false))
 	var arr = [colour1, colour2]
 	arr.sort()
-	print(arr)
 	match arr:
 		[SHAPE_COLOURS.TURQUOISE, SHAPE_COLOURS.TURQUOISE]:
 			return SHAPE_COLOURS.BG_COLOUR

@@ -21,6 +21,17 @@ func add_intersection(shape1, shape2):
 	intersections_with_1[shape2.get_path()] = intersection_shape
 	intersection_pieces[shape1.get_path()] = intersections_with_1
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_focus_prev"):
+		# Shift+tab
+		select_previous_circle()
+		pass
+	elif Input.is_action_just_pressed("ui_focus_next"):
+		# Tab
+		select_next_circle()
+		pass
+	elif Input.is_action_just_pressed("ui_accept"):
+		click_current_circle()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -96,42 +107,56 @@ func calculate_complete(circle: Node2D):
 
 
 
-func _on_Dinsky_mouse_entered():
-	if $Dinsky.is_complete():
-		$Dinsky.highlight_line()
-
-func _on_Dinsky_mouse_exited():
-	$Dinsky.deselect_line()
-	pass # Replace with function body.
-
 func complete_level():
 	print('Completed level!')
 	$LevelCompleteUI.show()
+	$LevelCompleteUI/NextLevelButton.grab_focus()
 
-func _on_Kan_mouse_entered():
-	if $Kan.is_complete():
-		$Kan.highlight_line()
+func select_next_circle():
+	var circles = get_tree().get_nodes_in_group('circles')
+	for i in range(circles.size()):
+		if circles[i].selected:
+			circles[i].selected = false
+			circles[(i + 1) % circles.size()].selected = true
+			return
 
-func _on_Kan_mouse_exited():
-	$Kan.deselect_line()
+func select_previous_circle():
+	var circles = get_tree().get_nodes_in_group('circles')
+	for i in range(circles.size()):
+		if circles[i].selected:
+			circles[i].selected = false
+			circles[i - 1].selected = true
+			return
 
+func click_current_circle():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		if circle.selected:
+			click_circle(circle)
+			return
+
+func deselect_all_circles():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		circle.selected = false
+
+func all_circles_popped():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		if not circle.popped:
+			return false
+	return true
+
+func click_circle(circle):
+	print('Selected ' + circle.get_path())
+	deselect_all_circles()
+	circle.selected = true
+	if circle.is_complete() and not circle.popped:
+		circle.pop()
+		for piece in intersection_pieces[circle.get_path()].values():
+			piece.hide()
+		if all_circles_popped():
+			complete_level()
 
 func _on_Dinsky_clicked():
-	$Dinsky.selected = true
-	$Kan.selected = false
-	if $Dinsky.is_complete():
-		$Dinsky.pop()
-		for piece in intersection_pieces[$Dinsky.get_path()].values():
-			piece.hide()
-		if $Kan.popped:
-			complete_level()
+	click_circle($Dinsky)
 
 func _on_Kan_clicked():
-	$Kan.selected = true
-	$Dinsky.selected = false
-	if $Kan.is_complete():
-		$Kan.pop()
-		for piece in intersection_pieces[$Kan.get_path()].values():
-			piece.hide()
-		if $Dinsky.popped:
-			complete_level()
+	click_circle($Kan)
