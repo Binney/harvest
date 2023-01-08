@@ -98,6 +98,7 @@ text = "A game for Ludum Dare 52"
 polygon = PoolVector2Array( 1029, -1, 1028, 601, -4, 600, -34, -4 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 784, -155 )
 
 [node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
