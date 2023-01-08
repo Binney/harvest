@@ -36,10 +36,19 @@ func _process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	scale_circle($Circle)
 	for circle in get_tree().get_nodes_in_group('circles'):
 		for shape in get_tree().get_nodes_in_group('shapes'):
 			mark_intersections(circle, shape)
 		circle.set_complete(calculate_complete(circle))
+
+func scale_circle(circle: RigidBody2D):
+	# 60 at top, 20 at bottom
+	# 0 at top, 4800 at bottom
+	var desired_size = int(round((4800 - circle.position.y) / 120)) + 20
+	if circle.size != desired_size:
+		# the rescaling is a bit of a faff so only do it if needed
+		circle.size = desired_size
 
 func mark_intersections(circle: Node2D, shape2: Node2D):
 	var intersection_marker = intersection_pieces[circle.get_path()][shape2.get_path()]
@@ -56,9 +65,6 @@ func mark_intersections(circle: Node2D, shape2: Node2D):
 		#print('No intersection')
 		intersection_marker.set_polygon(PoolVector2Array())
 
-	pass
-
-func _on_IntersectionMarker_input_event(viewport, event, shape_idx):
 	pass
 
 func get_polygon_global_coords(shape: Node2D):

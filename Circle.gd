@@ -80,7 +80,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("ui_up") and linear_velocity.y > -max_speed:
 		vv = -1
-	elif Input.is_action_pressed("ui_down") and (linear_velocity.y < max_speed or gravity_scale != 0):
+	elif Input.is_action_pressed("ui_down") and linear_velocity.y < max_speed:
 		vv = 1
 
 	if vv == 0 and vh == 0:
@@ -89,7 +89,7 @@ func _physics_process(delta):
 
 	# this is wrong, it makes the whole thing wobble because it oscillates between maxspeed and a bit below
 	# TODO fix
-	linear_damp = -1
+	#linear_damp = -1
 	apply_central_impulse(Vector2(vh, vv) * 100)
 
 func pop():
