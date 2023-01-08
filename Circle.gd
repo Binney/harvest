@@ -46,7 +46,8 @@ const circle_precision = 24
 func get_polygon():
 	return $Polygon2D.polygon
 
-func set_size(size):
+func set_size(new_size):
+	size = new_size
 	var shape = CircleShape2D.new()
 	shape.radius = size
 	$CollisionShape2D.shape = shape

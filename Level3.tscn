@@ -32,7 +32,14 @@ polygon = PoolVector2Array( 179, -170, 317, 310, 502, 222 )
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
 color = Color( 0.913725, 0.788235, 0.486275, 1 )
 antialiased = true
-polygon = PoolVector2Array( -263, 586, -47, 784, 1606, -302 )
+polygon = PoolVector2Array( 609, 353, 1606, -302, 502, 222 )
+
+[node name="Triangle7" parent="." groups=["shapes"] instance=ExtResource( 4 )]
+
+[node name="Polygon" type="Polygon2D" parent="Triangle7"]
+color = Color( 0.913725, 0.788235, 0.486275, 1 )
+antialiased = true
+polygon = PoolVector2Array( -263, 586, -47, 784, 373, 508, 317.237, 310.318 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 
@@ -65,6 +72,7 @@ polygon = PoolVector2Array( 373, 508, 405, 604, 460.364, 617.627, 680.365, 439.4
 [node name="PinkCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 136, 263 )
 input_pickable = true
+size = 70
 colour = Color( 0.945098, 0.737255, 0.709804, 1 )
 selected = true
 
@@ -86,6 +94,7 @@ colour = Color( 0.913725, 0.788235, 0.486275, 1 )
 [node name="RedCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 543, 93 )
 input_pickable = true
+size = 80
 
 [node name="LevelCompleteUI" type="Control" parent="."]
 margin_right = 40.0
