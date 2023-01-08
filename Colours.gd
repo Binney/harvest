@@ -37,3 +37,20 @@ func mix_colours(colour1: Color, colour2: Color):
 		_:
 			print('fallback')
 			return BLACK
+
+func get_rand_colour():
+	match randi() % 7:
+		0:
+			return TURQUOISE
+		1: 
+			return BLUE
+		2:
+			return DEEP_RED
+		3:
+			return GOLD
+		4:
+			return PINK
+		5:
+			return ORANGE
+		_:
+			return BLACK
