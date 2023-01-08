@@ -18,7 +18,7 @@ func set_colour(new_colour: int):
 	if not actual_shape:
 		print('no polygon')
 		return
-	actual_shape.color = Colours.to_hex(colour)
+	actual_shape.color = Color(Colours.to_hex(colour))
 
 func get_colour():
 	return colour

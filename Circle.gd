@@ -16,7 +16,7 @@ signal clicked
 func set_colour(new_colour: int):
 	print('Setting colour to ' + str(new_colour))
 	colour = new_colour
-	$Polygon2D.color = Color(Colours.to_hex(new_colour))
+	$Polygon2D.color = Colours.to_hex(new_colour)
 
 func get_colour():
 	return colour

@@ -9,6 +9,12 @@ func _ready():
 		for shape in get_tree().get_nodes_in_group('shapes'):
 			add_intersection(circle, shape)
 
+func spawn_intersections():
+	for shape in get_tree().get_nodes_in_group('shapes'):
+		
+		pass
+	pass
+
 func add_intersection(shape1, shape2):
 	var intersections_with_1 = intersection_pieces[shape1.get_path()] if intersection_pieces.has(shape1.get_path()) else {}
 

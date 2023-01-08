@@ -85,7 +85,7 @@ color = Color( 0.501961, 0.137255, 0.145098, 1 )
 antialiased = true
 polygon = PoolVector2Array( 399, 501, 709, 479, 492, 216 )
 
-[node name="Dinsky" parent="." instance=ExtResource( 2 )]
+[node name="Dinsky" parent="." groups=["circles"] instance=ExtResource( 2 )]
 position = Vector2( 274, 304 )
 input_pickable = true
 size = 100

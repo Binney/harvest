@@ -12,7 +12,7 @@ func set_polygon(new_polygon):
 	$CollisionPolygon2D.polygon = polygon
 	$Polygon2D.polygon = polygon
 
-func set_colour(new_colour: Color):
+func set_colour(new_colour: int):
 	colour = new_colour
 	$Polygon2D.color = Colours.to_hex(colour)
 

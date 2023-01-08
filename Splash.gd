@@ -11,6 +11,7 @@ var triangle_scene = preload("Triangle.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_circle()
+	$Button.grab_focus()
 	pass # Replace with function body.
 
 func spawn_circle():

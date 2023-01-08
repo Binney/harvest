@@ -13,6 +13,19 @@ func _ready():
 		add_child(intersection_shape)
 		intersection_pieces[shape.get_path()] = intersection_shape
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_focus_prev"):
+		# Shift+tab
+		$Dinsky.selected = true
+		pass
+	elif Input.is_action_just_pressed("ui_focus_next"):
+		# Tab
+		$Dinsky.selected = true
+		pass
+	elif Input.is_action_just_pressed("ui_accept"):
+		print('clicked accept')
+		click_current_circle()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	for shape in get_tree().get_nodes_in_group('shapes'):
@@ -55,12 +68,6 @@ func _on_NextLevelButton_pressed():
 	# TODO fade
 	get_tree().change_scene("res://Level2.tscn")
 
-func _on_Dinsky_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		print('Clicked circle! check if complete intersection and complete level')
-		if $Dinsky.is_complete():
-			complete_level()
-
 func is_complete(circle: Node2D):
 	for shape in intersection_pieces.keys():
 		#print('Checking ' + shape)
@@ -85,22 +92,37 @@ func is_complete(circle: Node2D):
 			#print('No intersection')
 	return false
 
-
-func _on_Dinsky_mouse_entered():
-	if $Dinsky.is_complete():
-		$Dinsky.highlight_line()
-
-func _on_Dinsky_mouse_exited():
-	$Dinsky.deselect_line()
-	pass # Replace with function body.
-
 func complete_level():
 	print('Completed level!')
-	$Dinsky.pop()
-	for intersection in intersection_pieces.values():
-		intersection.hide()
 	$LevelCompleteUI.show()
+	$LevelCompleteUI/NextLevelButton.grab_focus()
 
+func click_current_circle():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		if circle.selected:
+			click_circle(circle)
+			return
+
+func deselect_all_circles():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		circle.selected = false
+
+func all_circles_popped():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		if not circle.popped:
+			return false
+	return true
+
+func click_circle(circle):
+	print('Selected ' + circle.get_path())
+	deselect_all_circles()
+	circle.selected = true
+	if circle.is_complete() and not circle.popped:
+		circle.pop()
+		for piece in intersection_pieces.values():
+			piece.hide()
+		if all_circles_popped():
+			complete_level()
 
 
 func _on_Dinsky_clicked():

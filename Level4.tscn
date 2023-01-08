@@ -44,7 +44,7 @@ color = Color( 0.501961, 0.137255, 0.145098, 1 )
 antialiased = true
 polygon = PoolVector2Array( 546, 350, 667, -54, 348, 111 )
 
-[node name="Dinsky" parent="." instance=ExtResource( 2 )]
+[node name="Dinsky" parent="." groups=["circles"] instance=ExtResource( 2 )]
 position = Vector2( 278, 508 )
 input_pickable = true
 selected = true
@@ -121,6 +121,4 @@ theme = ExtResource( 4 )
 text = "Next level >"
 
 [connection signal="clicked" from="Dinsky" to="." method="_on_Dinsky_clicked"]
-[connection signal="mouse_entered" from="Dinsky" to="." method="_on_Dinsky_mouse_entered"]
-[connection signal="mouse_exited" from="Dinsky" to="." method="_on_Dinsky_mouse_exited"]
 [connection signal="pressed" from="LevelCompleteUI/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
