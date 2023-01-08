@@ -1,6 +1,8 @@
 extends RigidBody2D
 
-export var size = 50
+tool
+
+export var size = 50 setget set_size, get_size
 export var colour = Color8(128, 35, 37) setget set_colour, get_colour
 export var complete = false setget set_complete, is_complete
 
@@ -44,8 +46,7 @@ const circle_precision = 24
 func get_polygon():
 	return $Polygon2D.polygon
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func set_size(size):
 	var shape = CircleShape2D.new()
 	shape.radius = size
 	$CollisionShape2D.shape = shape
@@ -60,6 +61,13 @@ func _ready():
 	$Line2D.add_point($Line2D.get_point_position(1)) # complete the circle
 	$Polygon2D.polygon = polygon
 	pass # Replace with function body.
+
+func get_size():
+	return size
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
 
 func _physics_process(delta):
 	if not selected: return
@@ -97,3 +105,9 @@ func _on_RigidBody2D_input_event(viewport, event, shape_idx):
 		print('You clicked me! ' + get_path())
 		emit_signal('clicked')
 
+func _on_RigidBody2D_mouse_entered():
+	if is_complete():
+		highlight_line()
+
+func _on_RigidBody2D_mouse_exited():
+	deselect_line()
