@@ -152,6 +152,7 @@ func click_circle(circle):
 		circle.pop()
 		for piece in intersection_pieces[circle.get_path()].values():
 			piece.hide()
+		select_next_circle()
 		if all_circles_popped():
 			complete_level()
 
