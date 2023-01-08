@@ -46,7 +46,7 @@ polygon = PoolVector2Array( -263, 586, -47, 784, 373, 508, 317.237, 310.318 )
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.501961, 0.137255, 0.145098, 1 )
 antialiased = true
-polygon = PoolVector2Array( 431, 639, 1333, 699, 1595, -291 )
+polygon = PoolVector2Array( 869, 668, 1333, 699, 1595, -291, 680, 439 )
 
 [node name="Triangle4" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 
@@ -60,14 +60,14 @@ polygon = PoolVector2Array( 317, 310, 373, 508, 609, 353, 502, 222 )
 [node name="Polygon" type="Polygon2D" parent="Triangle5"]
 color = Color( 0.0196078, 0.25098, 0.611765, 1 )
 antialiased = true
-polygon = PoolVector2Array( 435, 636, 902, 708, 681, 440 )
+polygon = PoolVector2Array( 435, 636, 902, 708, 680, 439 )
 
 [node name="Triangle6" parent="." groups=["shapes"] instance=ExtResource( 4 )]
 
 [node name="Polygon" type="Polygon2D" parent="Triangle6"]
 color = Color( 0.329412, 0.658824, 0.607843, 1 )
 antialiased = true
-polygon = PoolVector2Array( 373, 508, 405, 604, 460.364, 617.627, 680.365, 439.461, 609, 353 )
+polygon = PoolVector2Array( 373, 508, 405, 604, 460.364, 617.627, 680, 439, 609, 353 )
 
 [node name="PinkCircle" parent="." groups=["circles"] instance=ExtResource( 1 )]
 position = Vector2( 136, 263 )

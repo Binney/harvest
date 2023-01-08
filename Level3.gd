@@ -22,6 +22,17 @@ func add_intersection(shape1, shape2):
 	intersections_with_1[shape2.get_path()] = intersection_shape
 	intersection_pieces[shape1.get_path()] = intersections_with_1
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_focus_prev"):
+		# Shift+tab
+		select_previous_circle()
+		pass
+	elif Input.is_action_just_pressed("ui_focus_next"):
+		# Tab
+		select_next_circle()
+		pass
+	elif Input.is_action_just_pressed("ui_accept"):
+		click_current_circle()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -89,6 +100,29 @@ func calculate_complete(circle: Node2D):
 func complete_level():
 	print('Completed level!')
 	$LevelCompleteUI.show()
+	$LevelCompleteUI/NextLevelButton.grab_focus()
+
+func select_next_circle():
+	var circles = get_tree().get_nodes_in_group('circles')
+	for i in range(circles.size()):
+		if circles[i].selected:
+			circles[i].selected = false
+			circles[(i + 1) % circles.size()].selected = true
+			return
+
+func select_previous_circle():
+	var circles = get_tree().get_nodes_in_group('circles')
+	for i in range(circles.size()):
+		if circles[i].selected:
+			circles[i].selected = false
+			circles[i - 1].selected = true
+			return
+
+func click_current_circle():
+	for circle in get_tree().get_nodes_in_group('circles'):
+		if circle.selected:
+			click_circle(circle)
+			return
 
 func deselect_all_circles():
 	for circle in get_tree().get_nodes_in_group('circles'):
@@ -100,11 +134,11 @@ func all_circles_popped():
 			return false
 	return true
 
-func select_circle(circle):
+func click_circle(circle):
 	print('Selected ' + circle.get_path())
 	deselect_all_circles()
 	circle.selected = true
-	if circle.is_complete():
+	if circle.is_complete() and not circle.popped:
 		circle.pop()
 		for piece in intersection_pieces[circle.get_path()].values():
 			piece.hide()
@@ -112,17 +146,17 @@ func select_circle(circle):
 			complete_level()
 
 func _on_OrangeCircle_clicked():
-	select_circle($OrangeCircle)
+	click_circle($OrangeCircle)
 
 func _on_RedCircle_clicked():
-	select_circle($RedCircle)
+	click_circle($RedCircle)
 
 func _on_GoldCircle_clicked():
-	select_circle($GoldCircle)
+	click_circle($GoldCircle)
 
 func _on_PinkCircle_clicked():
-	select_circle($PinkCircle)
+	click_circle($PinkCircle)
 
 func _on_BlueCircle_clicked():
-	select_circle($BlueCircle)
+	click_circle($BlueCircle)
 
