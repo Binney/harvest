@@ -24,7 +24,6 @@ func _ready():
 		points.append(line.points[-i - 1] + diff)
 		pass
 	$CollisionPolygon2D.polygon = points
-	$Polygon2D.polygon = points # TODO remove this one altogether and use just the parent
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

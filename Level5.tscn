@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme.tres" type="Theme" id=2]
-[ext_resource path="res://images/level5.jpg" type="Texture" id=3]
+[ext_resource path="res://images/background.jpg" type="Texture" id=3]
 [ext_resource path="res://Shape.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level5.gd" type="Script" id=5]
 [ext_resource path="res://Wall.tres" type="PhysicsMaterial" id=6]
@@ -22,7 +22,6 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Triangle1" parent="." groups=["shapes"] instance=ExtResource( 4 )]
-visible = false
 colour = 3
 
 [node name="Polygon" type="Polygon2D" parent="Triangle1"]
@@ -31,7 +30,6 @@ antialiased = true
 polygon = PoolVector2Array( 684, 293, 803, 346, 957, 214, 923, 44 )
 
 [node name="Triangle2" parent="." groups=["shapes"] instance=ExtResource( 4 )]
-visible = false
 colour = 4
 
 [node name="Polygon" type="Polygon2D" parent="Triangle2"]
@@ -40,7 +38,6 @@ antialiased = true
 polygon = PoolVector2Array( 1004, 441, 957, 214, 803, 346 )
 
 [node name="Triangle3" parent="." groups=["shapes"] instance=ExtResource( 4 )]
-visible = false
 
 [node name="Polygon" type="Polygon2D" parent="Triangle3"]
 color = Color( 0.329412, 0.658824, 0.607843, 1 )
@@ -48,7 +45,6 @@ antialiased = true
 polygon = PoolVector2Array( 869, 668, 1333, 699, 1022, 158, 956.859, 213.782, 1004, 441, 802.76, 345.74, 500, 605 )
 
 [node name="Triangle4" parent="." groups=["shapes"] instance=ExtResource( 4 )]
-visible = false
 colour = 1
 
 [node name="Polygon" type="Polygon2D" parent="Triangle4"]
@@ -66,34 +62,47 @@ selected = true
 
 [node name="Line2D" type="Line2D" parent="WallLine"]
 points = PoolVector2Array( 14, 504, 19, 474, 31, 451, 53, 436, 84, 427, 116, 437, 140, 452, 152, 474, 156, 502, 160, 470, 175, 449, 198, 432, 225, 427, 250, 433, 271, 445, 289, 468, 296, 502, 302, 477, 317, 461, 337, 453, 360, 455, 383, 474, 388, 502 )
-default_color = Color( 0.4, 0.501961, 1, 0.588235 )
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="WallLine2" parent="." instance=ExtResource( 7 )]
 
 [node name="Line2D" type="Line2D" parent="WallLine2"]
 points = PoolVector2Array( 358, 166, 362, 229, 374, 281, 389, 312, 420, 351, 475, 395, 513, 423, 565, 474, 600, 523, 625, 584 )
-default_color = Color( 0.4, 0.501961, 1, 0.47451 )
+width = 4.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="WallLine3" parent="." instance=ExtResource( 7 )]
 
 [node name="Line2D" type="Line2D" parent="WallLine3"]
 points = PoolVector2Array( 423, 103, 423, 171, 444, 253, 475, 307, 517, 356, 556, 399, 602, 450, 635, 505, 655, 545, 672, 587 )
-default_color = Color( 0.4, 0.501961, 1, 0.47451 )
+width = 7.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="WallLine4" parent="." instance=ExtResource( 7 )]
 
 [node name="Line2D" type="Line2D" parent="WallLine4"]
 points = PoolVector2Array( 749, 504, 744, 457, 718, 396, 687, 347, 653, 305, 619, 262, 595, 219, 588, 177, 591, 135 )
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="WallLine5" parent="." instance=ExtResource( 7 )]
 
 [node name="Line2D" type="Line2D" parent="WallLine5"]
 points = PoolVector2Array( 538, 193, 790, -8 )
+width = 4.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="WallLine6" parent="." instance=ExtResource( 7 )]
 
 [node name="Line2D" type="Line2D" parent="WallLine6"]
 points = PoolVector2Array( 586, 280, 873, -10 )
+width = 7.0
+default_color = Color( 0.156863, 0.156863, 0.176471, 1 )
+antialiased = true
 
 [node name="LevelCompleteUI" type="Control" parent="."]
 margin_right = 40.0
