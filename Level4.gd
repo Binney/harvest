@@ -101,6 +101,8 @@ func select_next_circle():
 	for i in range(circles.size()):
 		if circles[i].selected:
 			circles[i].selected = false
+			if circles[i].popped:
+				circles[i].remove_from_group('circles')
 			circles[(i + 1) % circles.size()].selected = true
 			return
 	circles[0].selected = true
@@ -110,6 +112,8 @@ func select_previous_circle():
 	for i in range(circles.size()):
 		if circles[i].selected:
 			circles[i].selected = false
+			if circles[i].popped:
+				circles[i].remove_from_group('circles')
 			circles[i - 1].selected = true
 			return
 	circles[0].selected = true
