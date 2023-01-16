@@ -39,6 +39,7 @@ func set_colour(value):
 	colour = value
 	emit_signal('shape_changed')
 
+# Not actually a getter, just a way of allowing the dev to trigger redraws in the editor
 func set_redraw_shape(value):
 	print("Redrawing shape")
 	if !has_node('Polygon2D'):
@@ -60,3 +61,7 @@ func spawn_handle_at(point: Vector2):
 	# TODO: spawn handle to click on
 	handles.push_back(point)
 	pass
+
+
+func _on_Polygon2D_draw():
+	set_redraw_shape(true)

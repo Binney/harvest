@@ -3,15 +3,12 @@ extends Node2D
 tool
 
 #export(Colours.SHAPE_COLOURS) var colour = Colours.SHAPE_COLOURS.BLACK setget set_colour, get_colour
-var colour = 1
 
-func set_colour(new_colour: int):
-	colour = new_colour
-	#print('Setting to ' + new_colour.to_html(false))
-	$Polygon2D.color = Color(1, 1, 1) #Colours.to_hex(colour)
+func set_colour(new_colour: Color):
+	$Polygon2D.color = new_colour
 
 func get_colour():
-	return colour
+	return $Polygon2D.color
 
 func set_polygon(polygon: PoolVector2Array):
 	$CollisionPolygon2D.polygon = polygon
