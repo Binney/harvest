@@ -213,10 +213,10 @@ position = Vector2( 512, 4382 )
 collision_layer = 255
 collision_mask = 255
 priority = 2.0
-space_override = 4
+space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )
-gravity = -200.0
+gravity = -100.0
 
 [node name="BigHoleThing" type="Sprite" parent="Area2D"]
 texture = ExtResource( 6 )
@@ -332,9 +332,9 @@ size = 30
 [node name="Circle" parent="." groups=["circles"] instance=ExtResource( 3 )]
 position = Vector2( 512, 78 )
 input_pickable = true
-mass = 5.0
+mass = 15.0
 gravity_scale = 5.0
-linear_damp = -1.0
+linear_damp = 3.0
 size = 60
 selected = true
 
