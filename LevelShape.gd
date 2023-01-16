@@ -24,7 +24,7 @@ enum colours {
 	FINAL_WHITE
 }
 
-export (colours) var colour = colours.TURQUOISE setget set_colour
+export (colours) var colour = colours.TURQUOISE setget set_colour, get_colour
 export var redraw_shape = false setget set_redraw_shape
 
 signal shape_changed
@@ -38,6 +38,9 @@ func set_colour(value):
 	print('Changed colour to ' + str(value))
 	colour = value
 	emit_signal('shape_changed')
+
+func get_colour():
+	return colour
 
 # Not actually a getter, just a way of allowing the dev to trigger redraws in the editor
 func set_redraw_shape(value):
@@ -64,4 +67,6 @@ func spawn_handle_at(point: Vector2):
 
 
 func _on_Polygon2D_draw():
-	set_redraw_shape(true)
+	pass
+	# TODO reinstate once script no longer freaking out
+	#set_redraw_shape(true)

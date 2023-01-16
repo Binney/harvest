@@ -24,7 +24,7 @@ colour = 1
 
 [node name="Polygon2D" type="Polygon2D" parent="TriangleA"]
 color = Color( 1, 1, 1, 0.478431 )
-polygon = PoolVector2Array( -241, 46, 17, 61, -29, -103 )
+polygon = PoolVector2Array( -241, 46, -3, 1, -120, -175 )
 
 [node name="TriangleB" parent="." groups=["level_shapes"] instance=ExtResource( 4 )]
 position = Vector2( 400, 250 )
@@ -32,9 +32,19 @@ colour = 3
 
 [node name="Polygon2D" type="Polygon2D" parent="TriangleB"]
 color = Color( 1, 1, 1, 0.478431 )
-polygon = PoolVector2Array( -102, 178, 155, -92, -41, -154 )
+polygon = PoolVector2Array( -102, 178, 155, -92, -56, -64 )
+
+[node name="TriangleC" parent="." groups=["level_shapes"] instance=ExtResource( 4 )]
+position = Vector2( 550, 100 )
+colour = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="TriangleC"]
+color = Color( 1, 1, 1, 0.498039 )
+polygon = PoolVector2Array( 131, 233, -14, -23, -150, 155 )
 
 [connection signal="shape_changed" from="TriangleA" to="." method="_on_TriangleA_shape_changed"]
 [connection signal="draw" from="TriangleA/Polygon2D" to="TriangleA" method="_on_Polygon2D_draw"]
 [connection signal="shape_changed" from="TriangleB" to="." method="_on_TriangleB_shape_changed"]
 [connection signal="draw" from="TriangleB/Polygon2D" to="TriangleB" method="_on_Polygon2D_draw"]
+[connection signal="shape_changed" from="TriangleC" to="." method="_on_TriangleC_shape_changed"]
+[connection signal="draw" from="TriangleC/Polygon2D" to="TriangleC" method="_on_Polygon2D_draw"]
