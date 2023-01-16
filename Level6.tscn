@@ -18,7 +18,20 @@ polygon = PoolVector2Array( 0, 602, 1025, 600, 1026, -1, 1103, -7, 1089, 663, -9
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Node2D" parent="." instance=ExtResource( 4 )]
+[node name="TriangleA" parent="." groups=["level_shapes"] instance=ExtResource( 4 )]
+position = Vector2( 500, 200 )
+colour = 1
 
-[node name="Polygon2D" type="Polygon2D" parent="Node2D"]
-polygon = PoolVector2Array( -74, 66, 125, -53, -24, -123 )
+[node name="Polygon2D" type="Polygon2D" parent="TriangleA"]
+color = Color( 1, 1, 1, 0.478431 )
+polygon = PoolVector2Array( -127, 98, 100, 32, -24, -123 )
+
+[node name="TriangleB" parent="." groups=["level_shapes"] instance=ExtResource( 4 )]
+position = Vector2( 400, 250 )
+
+[node name="Polygon2D" type="Polygon2D" parent="TriangleB"]
+color = Color( 1, 1, 1, 0.478431 )
+polygon = PoolVector2Array( -102, 178, 186, 21, 72, -83 )
+
+[connection signal="shape_changed" from="TriangleA" to="." method="_on_TriangleA_shape_changed"]
+[connection signal="shape_changed" from="TriangleB" to="." method="_on_TriangleB_shape_changed"]

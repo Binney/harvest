@@ -2,8 +2,11 @@
 
 [ext_resource path="res://LevelShape.gd" type="Script" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Area2D" type="Area2D"]
 script = ExtResource( 1 )
+colour = "green"
 
 [node name="Line2D" type="Line2D" parent="."]
 default_color = Color( 0.4, 1, 0.901961, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

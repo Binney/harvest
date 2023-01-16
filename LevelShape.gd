@@ -11,10 +11,33 @@ extends Node2D
 
 tool
 
-export var colour = 'green'
+enum colours {
+	TURQUOISE,
+	DEEP_RED,
+	PINK,
+	BLUE,
+	GOLD,
+	ORANGE,
+	BLACK,
+	BG_COLOUR,
+	ANSWER_RED,
+	FINAL_WHITE
+}
+
+export (colours) var colour = colours.TURQUOISE setget set_colour
 export var redraw_shape = false setget set_redraw_shape
 
+signal shape_changed
+
 var handles = []
+
+func get_polygon():
+	return $CollisionPolygon2D.polygon
+
+func set_colour(value):
+	print('Changed colour to ' + str(value))
+	colour = value
+	emit_signal('shape_changed')
 
 func set_redraw_shape(value):
 	print("Redrawing shape")
@@ -22,10 +45,13 @@ func set_redraw_shape(value):
 		return
 	var polygon = get_node('Polygon2D') as Polygon2D
 	$Line2D.clear_points()
+	$CollisionPolygon2D.polygon = polygon.polygon
 	clear_handles()
 	for point in polygon.polygon:
 		$Line2D.add_point(point)
 		spawn_handle_at(point)
+	$Line2D.add_point(polygon.polygon[0])
+	emit_signal('shape_changed')
 
 func clear_handles():
 	handles = []
