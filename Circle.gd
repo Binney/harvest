@@ -7,6 +7,9 @@ export var complete = false setget set_complete, is_complete
 export var selected = false
 export var popped = false
 
+var h_count = 0
+var v_count = 0
+
 signal clicked
 
 # Declare member variables here. Examples:
@@ -37,7 +40,7 @@ func highlight_line():
 func deselect_line():
 	$Line2D.width = 10
 
-var max_speed = 150
+var max_speed = 6000
 
 const circle_precision = 24
 
@@ -73,24 +76,38 @@ func _physics_process(delta):
 	var vh = 0
 	var vv = 0
 
-	if Input.is_action_pressed("ui_left") and linear_velocity.x > -max_speed:
-		vh = -1
+	# Go a bit slower on the first frame, so that lets the player nudge
+	# just a little amount if they want
+	if Input.is_action_just_pressed("ui_left"):
+		vh = -0.3
+		h_count = 0
+	elif Input.is_action_just_pressed("ui_right"):
+		vh = 0.3
+		h_count = 0
+	elif Input.is_action_pressed("ui_left") and linear_velocity.x > -max_speed:
+		vh = -0.3 * min(h_count, 5)
+		h_count += 1
 	elif Input.is_action_pressed("ui_right") and linear_velocity.x < max_speed:
-		vh = 1
+		vh = 0.3 * min(h_count, 5)
+		h_count += 1
 
-	if Input.is_action_pressed("ui_up") and linear_velocity.y > -max_speed:
-		vv = -1
+	if Input.is_action_just_pressed("ui_up"):
+		vv = -0.3
+		v_count = 0
+	elif Input.is_action_just_pressed("ui_down"):
+		vv = 0.3
+		v_count = 0
+	elif Input.is_action_pressed("ui_up") and linear_velocity.y > -max_speed:
+		vv = -0.3 * min(v_count, 5)
+		v_count += 1
 	elif Input.is_action_pressed("ui_down") and linear_velocity.y < max_speed:
-		vv = 1
+		vv = 0.3 * min(v_count, 5)
+		v_count += 1
 
 	if vv == 0 and vh == 0:
-		linear_damp = 2
 		return
 
-	# this is wrong, it makes the whole thing wobble because it oscillates between maxspeed and a bit below
-	# TODO fix
-	#linear_damp = -1
-	apply_central_impulse(Vector2(vh, vv) * 100)
+	apply_central_impulse(Vector2(vh, vv).limit_length(1.5) * delta * 5000)
 
 func pop():
 	print('Pop!')

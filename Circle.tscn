@@ -34,7 +34,7 @@ tracks/1/keys = {
 
 [node name="Circle" type="RigidBody2D"]
 gravity_scale = 0.0
-linear_damp = 2.0
+linear_damp = 5.0
 angular_damp = 0.5
 script = ExtResource( 1 )
 
