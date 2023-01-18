@@ -40,7 +40,8 @@ func to_hex(enum_colour: int):
 		_:
 			return '28282d' # Black
 
-var colour = colours.BLACK setget set_colour, get_colour
+export (colours) var colour = colours.BLACK setget set_colour, get_colour
+export var shape: PoolVector2Array
 #export(Colours.SHAPE_COLOURS) var colour = Colours.SHAPE_COLOURS.BLACK setget set_colour, get_colour
 
 func set_colour(new_colour: int):
@@ -52,8 +53,11 @@ func get_colour():
 	return colour
 
 func set_polygon(polygon: PoolVector2Array):
+	print('Setting polygon to:')
+	print(polygon)
 	$CollisionPolygon2D.polygon = polygon
 	$Polygon2D.polygon = polygon
+	shape = polygon
 
 func get_polygon():
 	return $CollisionPolygon2D.polygon

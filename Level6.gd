@@ -123,31 +123,55 @@ func redraw_intersections():
 
 func clear_intersections():
 	for node in get_tree().get_nodes_in_group('intersection_pieces'):
+		node.remove_from_group('intersection_pieces')
 		node.queue_free()
 
 func add_intersection_pieces_for(shape):
+	print('Adding intersection pieces for ' + str(shape))
 	# TODO
 	# - Keep running count of all area counted so far
 	# - Subtract off at the end and add remainder too
-	var running_total = []
+	var areas_left = [shape.get_polygon()]
 	for node in get_tree().get_nodes_in_group('intersection_pieces'):
 		var a = get_polygon_global_coords(shape)
+		print('Found an intersection piece:')
+		print(node)
 		var b = get_polygon_global_coords(node)
 		var colour = mix_colours(shape.get_colour(), node.get_colour())
 		draw_intersection(a, b, colour)
-		# TODO also cut out the corresponding bit of `node`
-		var diff = Geometry.clip_polygons_2d(a, b)
-		running_total.push_back(diff)
-	var area_covered = PoolVector2Array()
-	for polygon in running_total:
-		area_covered = Geometry.merge_polygons_2d(area_covered, polygon)
-	var remainder = Geometry.clip_polygons_2d(shape.get_polygon(), area_covered)
-	if !remainder.empty():
+
+		# TODO Cut intersection out of node:
+		var node_sub = Geometry.clip_polygons_2d(b, a)
+		print('Setting the other section to smaller')
+		print(node_sub)
+		#node.set_polygon(node_sub)
+		for section in node_sub:
+			spawn_intersection_at(section, node.get_colour())
+		# TODO re-transform back to node coordinates
+		node.remove_from_group('intersection_pieces')
+		node.queue_free()
+
+		var new_areas_left = []
+		for area in areas_left:
+			new_areas_left.append_array(Geometry.clip_polygons_2d(area, b))
+		areas_left = new_areas_left
+		#area_left = Geometry.clip_polygons_2d(area_left, b)
+#		for section in diff:
+#			print('Adding diff:')
+#			print(section)
+#			area_covered = Geometry.merge_polygons_2d(area_covered, section)
+	#var remainder = Geometry.clip_polygons_2d(shape.get_polygon(), area_covered)
+	if !areas_left.empty():
 		print("Not empty, drawing")
-		spawn_intersection_at(remainder, shape.get_colour())
+		print(areas_left)
+		for section in areas_left:
+			spawn_intersection_at(section, shape.get_colour())
 
 func get_polygon_global_coords(shape: Node2D):
-	if not shape.has_method('get_polygon'): return
+	print('Getting global coords for ' + str(shape))
+	if not shape.has_method('get_polygon'):
+		print('Shape has no method get_polygon')
+		return
 	var result = PoolVector2Array()
 	var transform = shape.get_global_transform()
 	for point in shape.get_polygon():
@@ -156,6 +180,9 @@ func get_polygon_global_coords(shape: Node2D):
 
 func draw_intersection(a: PoolVector2Array, b: PoolVector2Array, colour: int):
 	var intersections = Geometry.intersect_polygons_2d(a, b)
+	print('Drawing intersections...')
+	print(a)
+	print(b)
 	print(intersections)
 	if intersections.size() > 0:
 		for intersection in intersections:
@@ -178,6 +205,7 @@ func spawn_intersection_at(polygon: PoolVector2Array, colour: int):
 	intersection_marker.set_polygon(polygon)
 	intersection_marker.add_to_group('intersection_pieces')
 	add_child(intersection_marker)
+	intersection_marker.set_owner(get_tree().get_edited_scene_root())
 
 func _on_TriangleA_shape_changed():
 	print("Triangle A changed shape!")
