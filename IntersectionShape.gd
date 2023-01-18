@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 tool
 
@@ -46,7 +46,7 @@ export var shape: PoolVector2Array
 
 func set_colour(new_colour: int):
 	colour = new_colour
-	print("Set colour to " + to_hex(new_colour))
+	print("Set colour to #" + to_hex(new_colour))
 	$Polygon2D.color = Color(to_hex(new_colour))
 
 func get_colour():

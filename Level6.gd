@@ -101,76 +101,74 @@ func mix_colours(colour1: int, colour2: int):
 			print('fallback ' + str(colour1) + ', ' + str(colour2))
 			return colours.BLACK
 
-func redraw_intersections():
-	print('Drawing intersections')
-	clear_intersections()
-	var level_shapes = get_tree().get_nodes_in_group('level_shapes')
-	# TODO handle nth level intersections between the intersections themselves
-	# do this as
-	# - add non-intersecting bits too (clip_polygons_2d)
-	# - then iterate over entire intersection array to add next triangle
-	for shape in level_shapes:
-		add_intersection_pieces_for(shape)
-		pass
-#		for j in range(i + 1, level_shapes.size()):
-#			print("Matching " + str(i) + " with " + str(j))
-#			var a = get_polygon_global_coords(level_shapes[i])
-#			var b = get_polygon_global_coords(level_shapes[j])
-#			draw_intersection(a, b)
-#			draw_difference(a, b)
-#			pass
+var intersection_pieces = {}
+
+func _ready():
+	redraw_level()
+	for shape in get_tree().get_nodes_in_group('calculated_shapes'):
+		shape.connect('body_entered', self, '_on_body_entered', [shape])
+		shape.connect('body_exited', self, '_on_body_exited', [shape])
+
+func _on_body_entered(circle, shape):
+	# TODO spawn intersection piece between circle and shape
+	# use dictionary
+	print('Body entered')
+	print(circle)
+	print(shape)
+	if !intersection_pieces.has(circle.get_path()):
+		intersection_pieces[circle.get_path()] = {}
+	intersection_pieces[circle.get_path()][shape.get_path()] = 1
+
+func _on_body_exited(circle, shape):
+	# TODO lookup intersection piece between circle and shape in dictionary
+	# and delete it
+	print('Body exited')
+	print(circle)
+	print(shape)
+	intersection_pieces[circle.get_path()].erase(shape.get_path())
+
+func _physics_process(delta):
+	# TODO redraw all intersection pieces
+	# TODO mark circle as complete if needed
 	pass
 
+func redraw_level():
+	clear_intersections()
+	for shape in get_tree().get_nodes_in_group('level_shapes'):
+		print('Drawing intersections for ' + str(shape))
+		add_calculated_shapes_for(shape)
+
 func clear_intersections():
-	for node in get_tree().get_nodes_in_group('intersection_pieces'):
-		node.remove_from_group('intersection_pieces')
+	for node in get_tree().get_nodes_in_group('calculated_shapes'):
+		node.remove_from_group('calculated_shapes')
 		node.queue_free()
 
-func add_intersection_pieces_for(shape):
-	print('Adding intersection pieces for ' + str(shape))
-	# TODO
-	# - Keep running count of all area counted so far
-	# - Subtract off at the end and add remainder too
+func add_calculated_shapes_for(shape):
 	var areas_left = [shape.get_polygon()]
-	for node in get_tree().get_nodes_in_group('intersection_pieces'):
+	for node in get_tree().get_nodes_in_group('calculated_shapes'):
 		var a = get_polygon_global_coords(shape)
-		print('Found an intersection piece:')
-		print(node)
 		var b = get_polygon_global_coords(node)
 		var colour = mix_colours(shape.get_colour(), node.get_colour())
 		draw_intersection(a, b, colour)
 
-		# TODO Cut intersection out of node:
 		var node_sub = Geometry.clip_polygons_2d(b, a)
-		print('Setting the other section to smaller')
-		print(node_sub)
-		#node.set_polygon(node_sub)
 		for section in node_sub:
 			spawn_intersection_at(section, node.get_colour())
-		# TODO re-transform back to node coordinates
-		node.remove_from_group('intersection_pieces')
+		node.remove_from_group('calculated_shapes')
 		node.queue_free()
 
 		var new_areas_left = []
 		for area in areas_left:
 			new_areas_left.append_array(Geometry.clip_polygons_2d(area, b))
 		areas_left = new_areas_left
-		#area_left = Geometry.clip_polygons_2d(area_left, b)
-#		for section in diff:
-#			print('Adding diff:')
-#			print(section)
-#			area_covered = Geometry.merge_polygons_2d(area_covered, section)
-	#var remainder = Geometry.clip_polygons_2d(shape.get_polygon(), area_covered)
 	if !areas_left.empty():
-		print("Not empty, drawing")
-		print(areas_left)
+		print('Drawing remaining areas')
 		for section in areas_left:
+			print(section)
 			spawn_intersection_at(section, shape.get_colour())
 
 func get_polygon_global_coords(shape: Node2D):
-	print('Getting global coords for ' + str(shape))
 	if not shape.has_method('get_polygon'):
-		print('Shape has no method get_polygon')
 		return
 	var result = PoolVector2Array()
 	var transform = shape.get_global_transform()
@@ -180,41 +178,29 @@ func get_polygon_global_coords(shape: Node2D):
 
 func draw_intersection(a: PoolVector2Array, b: PoolVector2Array, colour: int):
 	var intersections = Geometry.intersect_polygons_2d(a, b)
-	print('Drawing intersections...')
-	print(a)
-	print(b)
-	print(intersections)
 	if intersections.size() > 0:
 		for intersection in intersections:
 			spawn_intersection_at(intersection, colour)
 
-func draw_difference(a: PoolVector2Array, b: PoolVector2Array):
-	var a_difference = Geometry.clip_polygons_2d(a, b)
-	if a_difference.size() > 0:
-		for polygon in a_difference:
-			pass#spawn_intersection_at(polygon, Color(0, 1, 0))
-	var b_difference = Geometry.clip_polygons_2d(b, a)
-	if b_difference.size() > 0:
-		for polygon in b_difference:
-			pass#spawn_intersection_at(polygon, Color(0, 0, 1))
-
 func spawn_intersection_at(polygon: PoolVector2Array, colour: int):
+	print('Spawning at ' + str(polygon))
 	var intersection_marker = shape_scene.instance()
 	intersection_marker.set_colour(colour)
-	#intersection_marker.set_colour(Colours.SHAPE_COLOURS.PINK)
 	intersection_marker.set_polygon(polygon)
-	intersection_marker.add_to_group('intersection_pieces')
+	intersection_marker.add_to_group('calculated_shapes')
 	add_child(intersection_marker)
-	intersection_marker.set_owner(get_tree().get_edited_scene_root())
+	# TODO reenable/get working in editor
+	#intersection_marker.set_owner(get_tree().get_edited_scene_root())
+
 
 func _on_TriangleA_shape_changed():
 	print("Triangle A changed shape!")
-	redraw_intersections()
+	redraw_level()
 
 func _on_TriangleB_shape_changed():
 	print("Triangle B changed shape!")
-	redraw_intersections()
+	redraw_level()
 
 func _on_TriangleC_shape_changed():
 	print("Triangle C changed shape!")
-	redraw_intersections()
+	redraw_level()

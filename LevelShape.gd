@@ -32,7 +32,10 @@ signal shape_changed
 var handles = []
 
 func get_polygon():
-	return $CollisionPolygon2D.polygon
+	if !has_node('Polygon2D'):
+		return $CollisionPolygon2D.polygon
+	var polygon = get_node('Polygon2D') as Polygon2D
+	return polygon.polygon
 
 func set_colour(value):
 	print('Changed colour to ' + str(value))
